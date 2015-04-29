@@ -57,3 +57,9 @@ class reina(object):
         else:
             return u'\u265B'
 
+class casilla(object):
+    def tostring():
+        if(self.color == "Blanco"):
+            return " "
+        else:
+            return u'\u25A1'
