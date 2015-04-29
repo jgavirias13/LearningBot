@@ -8,7 +8,7 @@ class Tablero(object):
 
     #Constructor de la clase Tablero
     def __init__(self, tab):
-        self.strTab
+        self.strTab = tab
 
         #Funciones que crean las fichas y las agregan a tablero
         def casillaBlanca():
