@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 empty_block = " "
 
 class Tablero(object):
@@ -5,7 +7,7 @@ class Tablero(object):
 
         self.board = []
         peones = "P " * 8
-        blancos = "T C A Q R A C T"
+        blancos = u'u\2656'
         peones_blancos = peones.strip()
         negros = blancos.lower()
         peones_negros = peones.lower()
