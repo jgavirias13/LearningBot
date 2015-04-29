@@ -11,7 +11,7 @@ class peon(ficha):
     come = [1,7]
     def __init__(self, pos, color):
         ficha.__init__(self,color)
-        if((pos >= 8 and pos <= 15) or (pos >= 48 and pos <= 55)):
+        if((pos >= 8 and pos <= 15 and color == "Negro") or (pos >= 48 and pos <= 55 and color == "Blanco")):
             self.movimientos.append(2)
     def tostring(self):
         if (self.color == "Blanco"):
