@@ -5,54 +5,59 @@ import fichas
 class Tablero(object):
     tablero = []
     def __init__(self, tab):
-        options = {'b': casillaBlanca,
-                    'B': casillaNegra,
-                    'p': peonBlanco,
-                    'P': peonNegro,
-                    't': torreBlanca,
-                    'T': torreNegra,
-                    'a': alfilBlanco,
-                    'A': alfilNegro,
-                    'c': caballoBlanco,
-                    'C': caballoNegro,
-                    'r': reinaBlanca,
-                    'R': reinaNegra,
-                    'k': reyBlanco,
-                    'K': reyNegro,
-        }
         def casillaBlanca():
-            self.tablero.append(casilla("blanco"))
+            self.tablero.append(fichas.casilla("Blanco"))
         def casillaNegra():
-            self.tablero.append(casilla("negro"))
-        def peonBlanco():
-            self.tablero.append(peon(i,"blanco"))
-        def peonNegro():
-            self.tablero.append(peon(i,"negro"))
+            self.tablero.append(fichas.casilla("Negro"))
+        def peonBlanco(i):
+            self.tablero.append(fichas.peon(i,"Blanco"))
+        def peonNegro(i):
+            self.tablero.append(fichas.peon(i,"Negro"))
         def torreBlanca():
-            self.tablero.append(torre("blanco"))
+            self.tablero.append(fichas.torre("Blanco"))
         def torreNegra():
-            self.tablero.append(torre("negro"))
+            self.tablero.append(fichas.torre("Negro"))
         def alfilBlanco():
-            self.tablero.append(alfil("blanco"))
+            self.tablero.append(fichas.alfil("Blanco"))
         def alfilNegro():
-            self.tablero.append(alfil("negro"))
+            self.tablero.append(fichas.alfil("Negro"))
         def caballoBlanco():
-            self.tablero.append(caballo("blanco"))
+            self.tablero.append(fichas.caballo("Blanco"))
         def caballoNegro():
-            self.tablero.append(caballo("negro"))
+            self.tablero.append(fichas.caballo("Negro"))
         def reinaBlanca():
-            self.tablero.append(reina("blanco"))
+            self.tablero.append(fichas.reina("Blanco"))
         def reinaNegra():
-            self.tablero.append(reina("negro"))
+            self.tablero.append(fichas.reina("Negro"))
         def reyBlanco():
-            self.tablero.append(rey("blanco"))
+            self.tablero.append(fichas.rey("Blanco"))
         def reyNegro():
-            self.tablero.append(rey("negro"))
-        for i in tab:
-            options[tab[i]]
+            self.tablero.append(fichas.rey("Negro"))
+        options = {98: casillaBlanca,  #b
+                    66: casillaNegra,  #B
+                    112: peonBlanco,    #p
+                    80: peonNegro,     #P
+                    116: torreBlanca,   #t
+                    84: torreNegra,    #T
+                    97: alfilBlanco,   #a
+                    65: alfilNegro,    #A
+                    99: caballoBlanco, #c
+                    67: caballoNegro,  #C
+                    114: reinaBlanca,   #r
+                    82: reinaNegra,    #R
+                    107: reyBlanco,     #k
+                    75: reyNegro,      #K
+        }
+        for j in range(len(tab)):
+            a = ord(tab[j])
+            if(a == 112  or a == 80):
+                options[a](j)
+            else:
+                options[a]()
 
 m = Tablero("tcarkactppppppppBbBbBbBbbBbBbBbBBbBbBbBbbBbBbBbBPPPPPPPPTCARKACT")
 for i in range (8):
     for j in range (8):
-        print m.tablero[i*8 + j].tostring,
+        aux = m.tablero[i*8+j]
+        print aux.tostring(),
     print
