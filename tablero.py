@@ -7,7 +7,8 @@ class Tablero(object):
 
         self.board = []
         peones = "P " * 8
-        blancos = u'u\2656'
+        blancos = u'\u2656'
+        print blancos
         peones_blancos = peones.strip()
         negros = blancos.lower()
         peones_negros = peones.lower()
