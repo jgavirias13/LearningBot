@@ -28,7 +28,7 @@ class Tablero(object):
         for i in range(8):
             self.tablero.append(peonN)
         for i in range(32):
-            self.tablero.append(" ")
+            self.tablero.append("-")
         for i in range (8):
             self.tablero.append(peonB)
         self.tablero.append(torreB)
