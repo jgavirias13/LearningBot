@@ -2,12 +2,16 @@ class peon(object):
     movimientos = [1]
     direccion = [0]
     come = [1,7]
-    def __init__(self, pos):
-        if(pos == 1 or pos == 6){
+    color = ""
+    def __init__(self, pos, color):
+        self.color = color
+        if(pos == 1 or pos == 6):
             movimientos.append(2)
-        }
     def tostring():
-        return "Peon"
+        if (self.color == "Blanco"):
+            return u'\u2659'
+        else:
+            return u'\u265F'
 class torre(object):
     movimientos = [1,2,3,4,5,6,7,8]
     direccion =[0,2,4,6]

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-empty_block = " "
+import fichas
 
 class Tablero(object):
     tablero = []
