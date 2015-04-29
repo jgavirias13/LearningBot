@@ -5,8 +5,12 @@ import fichas
 class Tablero(object):
     tablero = []
     strTab = ""
+
+    #Constructor de la clase Tablero
     def __init__(self, tab):
         self.strTab
+
+        #Funciones que crean las fichas y las agregan a tablero
         def casillaBlanca():
             self.tablero.append(fichas.casilla("Blanco"))
         def casillaNegra():
@@ -35,21 +39,24 @@ class Tablero(object):
             self.tablero.append(fichas.rey("Blanco"))
         def reyNegro():
             self.tablero.append(fichas.rey("Negro"))
+        #"Switch case" para los caracteres de cada ficha con su respectivo codigo ASCII
         options = {98: casillaBlanca,  #b
                     66: casillaNegra,  #B
-                    112: peonBlanco,    #p
+                    112: peonBlanco,   #p
                     80: peonNegro,     #P
-                    116: torreBlanca,   #t
+                    116: torreBlanca,  #t
                     84: torreNegra,    #T
                     97: alfilBlanco,   #a
                     65: alfilNegro,    #A
                     99: caballoBlanco, #c
                     67: caballoNegro,  #C
-                    114: reinaBlanca,   #r
+                    114: reinaBlanca,  #r
                     82: reinaNegra,    #R
-                    107: reyBlanco,     #k
+                    107: reyBlanco,    #k
                     75: reyNegro,      #K
         }
+
+        #Asignacion de las fichas creadas al tablero
         for j in range(len(tab)):
             a = ord(tab[j])
             if(a == 112  or a == 80):
