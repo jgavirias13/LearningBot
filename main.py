@@ -1,77 +1,65 @@
-import tablero
+import chess
 import fichas
 
 grafo = []
 aristas = []
 tabs = {}
+def colorCasilla(pos):
+    div = pos/8
+    mod = pos%2
+    moddiv = div%2
+    if moddiv == 0:
+        if mod == 0:
+            return "B"
+        return "b"
+    if mod == 0:
+        return "B"
+    return "b"
 
-def imprimirTablero(tablero):
+def imprimirTablero(tab):
     for i in range (8):
         print i+1,
         for j in range (8):
-            aux = tablero.tablero[i*8+j]
+            aux = tab.tablero[i*8+j]
             print aux.tostring(),
         print
     print ("  a b c d e f g h")
 
-def posibles(tablero):
+def posiblesNegra(origen):
+    posibles = []
     #Funciones que crean las fichas y las agregan a tablero
-    def casillaBlanca(i):
-        pass
-    def casillaNegra(i):
-        pass
-    def peonBlanco(i):
-        pass
-    def peonNegro(i):
-    def torreBlanca(i):
-        pass
-    def torreNegra(i):
-    def alfilBlanco(i):
-        pass
-    def alfilNegro(i):
-    def caballoBlanco(i):
-        pass
-    def caballoNegro(i):
-    def reinaBlanca(i):
-        pass
-    def reinaNegra(i):
-    def reyBlanco(i):
-        pass
-    def reyNegro(i):
-    def juegaBlanco(i):
-        self.turno = 0
-    def juegaNegro(i):
-        self.turno = 1
-    #"Switch case" para los caracteres de cada ficha con su respectivo codigo ASCII
-    options = {98: casillaBlanca,   #b
-                66: casillaNegra,   #B
-                112: peonBlanco,    #p
-                80: peonNegro,      #P
-                116: torreBlanca,   #t
-                84: torreNegra,     #T
-                97: alfilBlanco,    #a
-                65: alfilNegro,     #A
-                99: caballoBlanco,  #c
-                67: caballoNegro,   #C
-                114: reinaBlanca,   #r
-                82: reinaNegra,     #R
-                107: reyBlanco,     #k
-                75: reyNegro,       #K
-                48: juegaBlanco,    #0
-                49: juegaNegro,     #1
-        }
-    cad = tablero.strTab
-    a = jaque(tablero)
-    if (jaque == 0):
-        for i in range(len(cad)):
-            aux = ord(cad[i])
-            options[aux](i)
-    else if(jaque == 1):
-        options[cad[75]](i)
+    cad = origen.strTab
+    for i in range (len(cad)-1):
+        ficha = origen.tablero[i]
+        if (cad[i] != 'b' and cad[i] != 'B' and ficha.color != "Blanco" and ficha.type() != 'C'):
+            for j in range (len(ficha.direccion)):
+                for k in range (len(ficha.movimientos)):
+                    direc = ficha.direccion[j]
+                    movi = ficha.movimientos[k]
+                    aux = i+(direc*movi)
+                    if (((direc == -1 or direc == 1) and (aux/8 == i/8)) or ((direc == 8) and (aux < 64)) or ((direc == -8) and (aux >= 0)) or ((direc == -9 or direc == -7) and (aux >= 0 and (aux/8 + movi == i/8))) or ((direc == 7 or direc == 9) and (aux < 64 and (aux/8 - movi == i/8)))):
+                        posicion = origen.tablero[aux]
+                        if (posicion.jugador != 1):
+                            if (posicion.jugador == 0):
+                                fin = cad[0:i] + colorCasilla(i) + cad[i+1:aux] + ficha.type() + cad[aux+1:]
+                                taux = chess.Tablero(fin)
+                                posibles.append(taux)
+                                imprimirTablero(taux)
+                                break
+                            else:
+                                fin = cad[0:i] + colorCasilla(i) + cad[i+1:aux] + ficha.type() + cad[aux+1:]
+                                taux = chess.Tablero(fin)
+                                posibles.append(taux)
+                        else:
+                            break
+                        
+    return posibles
 
 def main():
-    st = "TCARKACTPPPPPPPPbBbBbBbBBbBbBbBbbBbBbBbBBbBbBbBbpppppppptcarkact0"
-    m = tablero.Tablero(st)
+    st = "TCARKACTPPBbBbBbbBbBbBbcBbBbBbptbBpBpBbBBaBbBbBbpppppppptcarkact0"
+    m = chess.Tablero(st)
     tabs[st] = m
-    imprimirTablero(m)
+    sol = posiblesNegra(m)
+    for i in range (len(sol)):
+        imprimirTablero(sol[i])
 main()

@@ -2,15 +2,15 @@
 
 import fichas
 
-class Tablero(object):
-    tablero = []
+class Tablero():
     strTab = ""
     punt = 0
     turno = 0
+    tablero = []
     #Constructor de la clase Tablero
     def __init__(self, tab):
         self.strTab = tab
-
+        self.tablero = []
         #Funciones que crean las fichas y las agregan a tablero
         def casillaBlanca():
             self.tablero.append(fichas.casilla("Blanco"))
@@ -41,9 +41,9 @@ class Tablero(object):
         def reyNegro():
             self.tablero.append(fichas.rey("Negro"))
         def juegaBlanco():
-            self.turno = 0
+            turno = 0
         def juegaNegro():
-            self.turno = 1
+            turno = 1
         #"Switch case" para los caracteres de cada ficha con su respectivo codigo ASCII
         options = {98: casillaBlanca,   #b
                     66: casillaNegra,   #B

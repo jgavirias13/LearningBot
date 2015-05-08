@@ -1,18 +1,26 @@
 class ficha(object):
     color = ""
+    jugador = "n"
     def __init__(self,color):
         self.color = color;
     def tostring(self):
         pass
 
 class peon(ficha):
+    def type(self):
+        if self.jugador == 0:
+            return 'p'
+        else:
+            return 'P'
     movimientos = [1]
-    direccion = [0]
+    direccion = [8]
     come = [1,7]
     def __init__(self, pos, color):
         ficha.__init__(self,color)
-        if((pos >= 8 and pos <= 15 and color == "Negro") or (pos >= 48 and pos <= 55 and color == "Blanco")):
-            self.movimientos.append(2)
+        if color == "Blanco":
+            self.jugador = 0
+        else:
+            self.jugador = 1
     def tostring(self):
         if (self.color == "Blanco"):
             return u'\u2659'
@@ -20,10 +28,20 @@ class peon(ficha):
             return u'\u265F'
 
 class torre(ficha):
+    def type(self):
+        if self.jugador == 0:
+            return 't'
+        else:
+            return 'T'
     movimientos = [1,2,3,4,5,6,7,8]
-    direccion =[0,2,4,6]
+    direccion =[8,-1,-8,1]
+    come = direccion
     def __init__(self,color):
         ficha.__init__(self,color)
+        if color == "Blanco":
+            self.jugador = 0
+        else:
+            self.jugador = 1
     def tostring(self):
         if (self.color == "Blanco"):
             return u'\u2656'
@@ -31,9 +49,19 @@ class torre(ficha):
             return u'\u265C'
 
 class caballo(ficha):
-    direccion = [0,2,4,6]
+    def type(self):
+        if self.jugador == 0:
+            return 'c'
+        else:
+            return 'C'
+    direccion = [8,-1,-8,1]
+    come = direccion
     def __init__(self,color):
         ficha.__init__(self,color)
+        if color == "Blanco":
+            self.jugador = 0
+        else:
+            self.jugador = 1
     def tostring(self):
         if (self.color == "Blanco"):
             return u'\u2658'
@@ -41,10 +69,20 @@ class caballo(ficha):
             return u'\u265E'
 
 class alfil(ficha):
+    def type(self):
+        if self.jugador == 0:
+            return 'a'
+        else:
+            return 'A'
     movimientos = [1,2,3,4,5,6,7,8]
-    direccion = [1,3,5,7]
+    direccion = [7,-9,-7,9]
+    come = direccion
     def __init__(self,color):
         ficha.__init__(self,color)
+        if color == "Blanco":
+            self.jugador = 0
+        else:
+            self.jugador = 1
     def tostring(self):
         if (self.color == "Blanco"):
             return u'\u2657'
@@ -52,10 +90,20 @@ class alfil(ficha):
             return u'\u265D'
 
 class rey(ficha):
+    def type(self):
+        if self.jugador == 0:
+            return 'k'
+        else:
+            return 'K'
     movimientos = [1]
-    direccion = [0,1,2,3,4,5,6,7]
+    direccion = [8,7,-1,-9,-8,-7,1,9]
+    come = direccion
     def __init__(self,color):
         ficha.__init__(self,color)
+        if color == "Blanco":
+            self.jugador = 0
+        else:
+            self.jugador = 1
     def tostring(self):
         if (self.color == "Blanco"):
             return u'\u2654'
@@ -63,10 +111,20 @@ class rey(ficha):
             return u'\u265A'
 
 class reina(ficha):
+    def type(self):
+        if self.jugador == 0:
+            return 'r'
+        else:
+            return 'R'
     movimientos = [1,2,3,4,5,6,7,8]
-    direccion = [0,1,2,3,4,5,6,7]
+    direccion = [8,7,-1,-9,-8,-7,1,9]
+    come = direccion
     def __init__(self,color):
         ficha.__init__(self,color)
+        if color == "Blanco":
+            self.jugador = 0
+        else:
+            self.jugador = 1
     def tostring(self):
         if (self.color == "Blanco"):
             return u'\u2655'
@@ -74,6 +132,11 @@ class reina(ficha):
             return u'\u265B'
 
 class casilla(ficha):
+    def type(self):
+        if self.color == "Blanco":
+            return 'b'
+        else:
+            return 'B'
     def __init__(self,color):
         ficha.__init__(self,color)
     def tostring(self):
