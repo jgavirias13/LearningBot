@@ -19,7 +19,7 @@ def colorCasilla(pos):
 
 def imprimirTablero(tab):
     for i in range (8):
-        print i+1,
+        print 8-i,
         for j in range (8):
             aux = tab.tablero[i*8+j]
             print aux.tostring(),
@@ -28,6 +28,23 @@ def imprimirTablero(tab):
     print ("-----------------")
     print ("-----------------")
 
+def juegaHM(origen):
+    imprimirTablero(origen)
+    x = raw_input('Su jugada a continuacion, use mayusculas: ')
+    aux = ord(x[0]) - 65
+    auxn = 8 - int(x[1])
+    inp = auxn*8 + aux
+    aux = ord(x[3]) - 65
+    auxn = 8 - int(x[4])
+    ops = auxn*8 + aux
+    if (inp < ops):
+        jugada = origen.strTab[:inp] + colorCasilla(inp) + origen.strTab[inp+1:ops] + origen.tablero[inp].type() + origen.strTab[ops+1:]
+        taux = chess.Tablero(jugada)
+        imprimirTablero(taux)
+    else:
+        jugada = origen.strTab[:ops] + origen.tablero[inp].type() + origen.strTab[ops+1:inp] + colorCasilla(inp) + origen.strTab[inp+1:]
+        taux = chess.Tablero(jugada)
+        imprimirTablero(taux)
 def posiblesNegra(origen):
     posibles = []
     #Funciones que crean las fichas y las agregan a tablero
@@ -93,7 +110,7 @@ def posiblesNegra(origen):
                     fin = cad [0:i] + colorCasilla(i) + cad[i+1:auxc] + ficha.type() + cad[auxc+1:]
                     taux = chess.Tablero(fin)
                     posibles.append(taux)
-                if (auxc > 55 and auxc < 65 and origen.tablero[auxc].jugador == "n"):
+                if (auxc > 55 and auxc < 64 and origen.tablero[auxc].jugador == "n"):
                     arr = ['c', 'a', 't', 'r']
                     for j in range(len(arr)):
                         fin = cad [0:i] + colorCasilla(i) + cad[i+1:auxc] + arr[j] + cad[auxc+1:]
@@ -101,11 +118,11 @@ def posiblesNegra(origen):
                         posibles.append(taux)
             elif (cad[i] == 'C'):
                     def compar(aux, mi):
-                        if (aux/8 - mi == i/8 and aux < 65 and origen.tablero[aux].jugador == "n"):
+                        if (aux/8 - mi == i/8 and aux < 64 and origen.tablero[aux].jugador == "n"):
                             fin = cad [0:i] + colorCasilla(i) + cad[i+1:aux] + ficha.type() + cad[aux+1:]
                             taux = chess.Tablero(fin)
                             posibles.append(taux)
-                        if (aux/8 - mi == i/8 and aux < 65 and origen.tablero[aux].jugador == 0):
+                        if (aux/8 - mi == i/8 and aux < 64 and origen.tablero[aux].jugador == 0):
                             fin = cad [0:i] + colorCasilla(i) + cad[i+1:aux] + ficha.type() + cad[aux+1:]
                             taux = chess.Tablero(fin)
                             posibles.append(taux)
@@ -143,10 +160,11 @@ def main():
     #st = "bBbBbBbBBbBbBbBbbBbBbBbBBbBbBbBBbBbBbBbBBbBbBbBbPBbBbPbBBbBbBbBb1"
     #st = "bBbBbBbBBbBbBbBbbBbBbBbBBbBbBbBbbBbBbBbBBbBbBbBbbBbBbBbRBbBbBbBb1"
     #st = "bBbBbBbBBbBbBbBbbBbBbBbBCbBbBbBbbBbBbBbBBbBbBbBbbBbBbBbCBbBbBbBb1"
+    #st = "bbBbBbBbBCbBbBbBpppppppppppppppppppppppppppppCCCPPPppppPPPppPPppp0"
     m = chess.Tablero(st)
     tabs[st] = m
     sol = posiblesNegra(m)
-    imprimirTablero(m)
-    for i in range (len(sol)):
-        imprimirTablero(sol[i])
+    for j in range (len(sol)):
+        imprimirTablero(sol[j])
+    juegaHM(m)
 main()
