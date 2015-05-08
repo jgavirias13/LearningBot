@@ -14,7 +14,6 @@ class peon(ficha):
             return 'P'
     movimientos = [1]
     direccion = [8]
-    come = [1,7]
     def __init__(self, pos, color):
         ficha.__init__(self,color)
         if color == "Blanco":
@@ -54,7 +53,7 @@ class caballo(ficha):
             return 'c'
         else:
             return 'C'
-    direccion = [8,-1,-8,1]
+    direccion = [8,7,-1,-9,-8,-7,1,9]
     come = direccion
     def __init__(self,color):
         ficha.__init__(self,color)
@@ -143,4 +142,4 @@ class casilla(ficha):
         if(self.color == "Blanco"):
             return " "
         else:
-            return u'\u25A1'
+            return u'\u2588'
