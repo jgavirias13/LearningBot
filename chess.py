@@ -4,7 +4,7 @@ import fichas
 
 class Tablero():
     strTab = ""
-    punt = 0
+    puntaje = 0
     turno = 0
     tablero = []
     #Constructor de la clase Tablero

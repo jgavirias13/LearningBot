@@ -1,6 +1,7 @@
 class ficha(object):
     color = ""
     jugador = "n"
+    score = 0
     def __init__(self,color):
         self.color = color;
     def tostring(self):
@@ -20,6 +21,7 @@ class peon(ficha):
             self.jugador = 0
         else:
             self.jugador = 1
+        self.score = 1
     def tostring(self):
         if (self.color == "Blanco"):
             return u'\u2659'
@@ -41,6 +43,7 @@ class torre(ficha):
             self.jugador = 0
         else:
             self.jugador = 1
+        self.score = 5
     def tostring(self):
         if (self.color == "Blanco"):
             return u'\u2656'
@@ -61,6 +64,7 @@ class caballo(ficha):
             self.jugador = 0
         else:
             self.jugador = 1
+        self.score = 3
     def tostring(self):
         if (self.color == "Blanco"):
             return u'\u2658'
@@ -82,6 +86,7 @@ class alfil(ficha):
             self.jugador = 0
         else:
             self.jugador = 1
+        self.score = 3
     def tostring(self):
         if (self.color == "Blanco"):
             return u'\u2657'
@@ -124,6 +129,7 @@ class reina(ficha):
             self.jugador = 0
         else:
             self.jugador = 1
+        self.score = 9
     def tostring(self):
         if (self.color == "Blanco"):
             return u'\u2655'
