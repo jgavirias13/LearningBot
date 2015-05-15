@@ -5,6 +5,7 @@ import random
 grafo = []
 aristas = []
 tabs = {}
+actual = []
 
 def colorCasilla(pos):
     div = pos/8
@@ -35,12 +36,10 @@ def agregarGrafo(origen, destino, puntaje):
         out = grafo[ax]
         if (ax not in aristas[tabs[origen.strTab]]):
             aristas[tabs[origen.strTab]].append(tabs[out.strTab])
-            punt = origen.puntaje + out.puntaje + puntaje
-            origen.puntaje = punt
     else:
-        origen.puntaje = origen.puntaje + puntaje
-        a = len(grafo) - 1
+        a = len(grafo)
         tabs[destino.strTab] = a
+        destino.puntaje = puntaje
         grafo.append(destino)
         aristas[tabs[origen.strTab]].append(a)
         b = []
@@ -125,17 +124,12 @@ def posiblesNegra(origen):
                             
             elif (cad[i] == 'P'):
                 auxc = i + 7
-                if (auxc/8 + 1 == i/8 and origen.tablero[auxc].jugador == 0):
+                if (auxc/8 - 1 == i/8 and origen.tablero[auxc].jugador == 0):
                     fin = cad [0:i] + colorCasilla(i) + cad[i+1:auxc] + ficha.type() + cad[auxc+1:]
                     taux = chess.Tablero(fin)
                     agregarGrafo(origen, taux, origen.tablero[auxc].score)
                 auxc = i + 9
-                if (auxc/8 + 1 == i/8 and origen.tablero[auxc].jugador == 0):
-                    fin = cad [0:i] + colorCasilla(i) + cad[i+1:auxc] + ficha.type() + cad[auxc+1:]
-                    taux = chess.Tablero(fin)
-                    agregarGrafo(origen, taux, origen.tablero[auxc].score)
-                auxc = i + 16
-                if (i > 7 and i < 16 and origen.tablero[auxc].jugador == "n"):
+                if (auxc/8 - 1 == i/8 and origen.tablero[auxc].jugador == 0):
                     fin = cad [0:i] + colorCasilla(i) + cad[i+1:auxc] + ficha.type() + cad[auxc+1:]
                     taux = chess.Tablero(fin)
                     agregarGrafo(origen, taux, origen.tablero[auxc].score)
@@ -144,12 +138,19 @@ def posiblesNegra(origen):
                     fin = cad [0:i] + colorCasilla(i) + cad[i+1:auxc] + ficha.type() + cad[auxc+1:]
                     taux = chess.Tablero(fin)
                     agregarGrafo(origen, taux, origen.tablero[auxc].score)
+                else:
+                    break
                 if (auxc > 55 and auxc < 64 and origen.tablero[auxc].jugador == "n"):
                     arr = ['c', 'a', 't', 'r']
                     for j in range(len(arr)):
                         fin = cad [0:i] + colorCasilla(i) + cad[i+1:auxc] + arr[j] + cad[auxc+1:]
                         taux = chess.Tablero(fin)
                         agregarGrafo(origen, taux, taux.tablero[auxc].score)
+                auxc = i + 16
+                if (i > 7 and i < 16 and origen.tablero[auxc].jugador == "n"):
+                    fin = cad [0:i] + colorCasilla(i) + cad[i+1:auxc] + ficha.type() + cad[auxc+1:]
+                    taux = chess.Tablero(fin)
+                    agregarGrafo(origen, taux, origen.tablero[auxc].score)
             elif (cad[i] == 'C'):
                     def compar(aux, mi):
                         if (aux/8 - mi == i/8 and aux < 64 and origen.tablero[aux].jugador == "n"):
@@ -198,11 +199,13 @@ def main():
     grafo.append(m)
     a = []
     aristas.append(a)
-    b = 1
-    while b:
+    b = 10
+    while b>0:
+        actual.append(tabs[m.strTab])
         juego = juegaHM(m)
         posiblesNegra(juego)
         pos = tabs[juego.strTab]
+        actual.append(pos)
         posibles = []
         maximo = 0
         for i in range(len(aristas[pos])):
@@ -212,7 +215,16 @@ def main():
             elif (tabAux.puntaje > maximo):
                 posibles = []
                 posibles.append(tabAux)
+                maximo = tabAux.puntaje
         ran = random.randrange(len(posibles))
+        print maximo
         m = posibles[ran]
-        imprimirTablero(m)
+        b = b-1
+    suma = 0
+    for i in range(len(actual)):
+        aux = len(actual) - i - 1
+        punt = grafo[actual[aux]].puntaje
+        suma = suma + punt
+        grafo[actual[aux]].puntaje = suma
+
 main()
