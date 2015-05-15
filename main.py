@@ -7,6 +7,7 @@ aristas = []
 tabs = {}
 actual = []
 
+#Define la funcion del color que debe de ir la casilla cuando esta vacia el tablero
 def colorCasilla(pos):
     div = pos/8
     mod = pos%2
@@ -19,6 +20,7 @@ def colorCasilla(pos):
         return "B"
     return "b"
 
+#Funcion que imprime un tablero dado
 def imprimirTablero(tab):
     for i in range (8):
         print 8-i,
@@ -30,6 +32,7 @@ def imprimirTablero(tab):
     print ("-----------------")
     print ("-----------------")
 
+#Agrega un tablero al grafo, una lista a sus aristas y lo agrega al diccionaro con su string del tablero y la posicion del grafo
 def agregarGrafo(origen, destino, puntaje):
     if (destino.strTab in tabs):
         ax = tabs[destino.strTab]
@@ -45,10 +48,11 @@ def agregarGrafo(origen, destino, puntaje):
         b = []
         aristas.append(b)
 
+#Define la funcion para que juegue el humano
 def juegaHM(origen):
     imprimirTablero(origen)
     a = 1
-    while a:
+    while a: 
         x = raw_input('Su jugada a continuacion, use mayusculas: ')
         aux = ord(x[0]) - 65
         auxn = 8 - int(x[1])
@@ -64,7 +68,7 @@ def juegaHM(origen):
                     taux = chess.Tablero(jugada)
                     score = 0
                     if (origen.tablero[ops].jugador == 1):
-                        score = score + origen.tablero[ops].score
+                        score = score - origen.tablero[ops].score
                     agregarGrafo(origen, taux, score)
                     
                 else:
@@ -73,7 +77,7 @@ def juegaHM(origen):
                     taux = chess.Tablero(jugada)
                     score = 0
                     if (origen.tablero[ops].jugador == 1):
-                        score = score + origen.tablero[ops].score
+                        score = score - origen.tablero[ops].score
                     agregarGrafo(origen, taux, score)
                 a = 0
                 return taux
@@ -194,37 +198,41 @@ def main():
     #st = "bBbBbBbBBbBbBbBbbBbBbBbBBbBbBbBbbBbBbBbBBbBbBbBbbBbBbBbRBbBbBbBb1"
     #st = "bBbBbBbBBbBbBbBbbBbBbBbBCbBbBbBbbBbBbBbBBbBbBbBbbBbBbBbCBbBbBbBb1"
     #st = "bbBbBbBbBCbBbBbBpppppppppppppppppppppppppppppCCCPPPppppPPPppPPppp0"
+    jugar = 1
     m = chess.Tablero(st)
     tabs[st] = 0
     grafo.append(m)
     a = []
     aristas.append(a)
-    b = 10
-    while b>0:
-        actual.append(tabs[m.strTab])
-        juego = juegaHM(m)
-        posiblesNegra(juego)
-        pos = tabs[juego.strTab]
-        actual.append(pos)
-        posibles = []
-        maximo = 0
-        for i in range(len(aristas[pos])):
-            tabAux = grafo[aristas[pos][i]]
-            if (tabAux.puntaje == maximo):
-                posibles.append(tabAux)
-            elif (tabAux.puntaje > maximo):
-                posibles = []
-                posibles.append(tabAux)
-                maximo = tabAux.puntaje
-        ran = random.randrange(len(posibles))
-        print maximo
-        m = posibles[ran]
-        b = b-1
-    suma = 0
-    for i in range(len(actual)):
-        aux = len(actual) - i - 1
-        punt = grafo[actual[aux]].puntaje
-        suma = suma + punt
-        grafo[actual[aux]].puntaje = suma
-
+    while jugar:
+        m = grafo[0]
+        b = 2
+        while b>0:
+            actual.append(tabs[m.strTab])
+            juego = juegaHM(m)
+            posiblesNegra(juego)
+            pos = tabs[juego.strTab]
+            actual.append(pos)
+            posibles = []
+            maximo = 0
+            for i in range(len(aristas[pos])):
+                tabAux = grafo[aristas[pos][i]]
+                if (tabAux.puntaje == maximo):
+                    posibles.append(tabAux)
+                elif (tabAux.puntaje > maximo):
+                    posibles = []
+                    posibles.append(tabAux)
+                    maximo = tabAux.puntaje
+            ran = random.randrange(len(posibles))
+            m = posibles[ran]
+            b = b-1
+        suma = 0
+        for i in range(len(actual)):
+            aux = len(actual) - i - 1
+            punt = grafo[actual[aux]].puntaje
+            suma = suma + punt
+            grafo[actual[aux]].puntaje = suma
+        rpta = raw_input('Desea un nuevo juego? (Y/N):')
+        if rpta.lower() == "n":
+            juegar = 0
 main()
