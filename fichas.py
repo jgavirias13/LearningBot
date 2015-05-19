@@ -15,12 +15,17 @@ class peon(ficha):
             return 'P'
     movimientos = [1]
     direccion = [8]
+    come = []
     def __init__(self, pos, color):
         ficha.__init__(self,color)
         if color == "Blanco":
             self.jugador = 0
+            self.come.append(-9)
+            self.come.append(-7)
         else:
             self.jugador = 1
+            self.come.append(9)
+            self.come.append(7)
         self.score = 1
     def tostring(self):
         if (self.color == "Blanco"):
@@ -56,7 +61,8 @@ class caballo(ficha):
             return 'c'
         else:
             return 'C'
-    direccion = [8,7,-1,-9,-8,-7,1,9]
+    movimientos = []
+    direccion = []
     come = direccion
     def __init__(self,color):
         ficha.__init__(self,color)
