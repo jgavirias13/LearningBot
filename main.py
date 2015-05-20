@@ -30,16 +30,17 @@ def jaque(tab):
         a = tab.strTab.find('k')
     seg = 1
     mov = 1
+    #Verifica si hay jaque al rey hacia arriba.
     while seg:
         aux = a + 8*mov
         if (aux < 64):
-            if (tab.tablero[aux].jugador == "n"):
+            if (tab.tablero[aux].jugador == "n"): #Verifica si esta vacia la casilla
                 mov = mov + 1
-            elif (tab.tablero[aux].jugador == jug):
+            elif (tab.tablero[aux].jugador == jug): #Verifica si en la casilla hay una pieza propia
                 seg = 0
             else:
-                if (-8) in tab.tablero[aux].come and mov in tab.tablero[aux].movimientos:
-                    print "jaque"
+                if (-8) in tab.tablero[aux].come and mov in tab.tablero[aux].movimientos: #Verifica si la casilla que hace el jaque si puede
+                    print "jaque"                                                         #hacer el movimiento para comer
                     return 1
                 else:
                     seg = 0
@@ -47,6 +48,7 @@ def jaque(tab):
             seg = 0
     seg = 1
     mov = 1
+    #Verifica si hay jaque al rey hacia abajo.
     while seg:
         aux = a - 8*mov
         if(aux > 0):
@@ -64,8 +66,10 @@ def jaque(tab):
             seg = 0
     seg = 1
     mov = 1
+    #Verifica si hay jaque desde la derecha.
     while seg:
         aux = a + 1*mov
+        #Condiciona si el jaque es en la misma fila
         if (a/8 == aux/8):
             if (tab.tablero[aux].jugador == "n"):
                 mov = mov + 1
@@ -81,6 +85,7 @@ def jaque(tab):
             seg = 0
     seg = 1
     mov = 1
+    #Verifica si hay jaque desde la izquierda.
     while seg:
         aux = a - 1*mov
         if (a/8 == aux/8):
@@ -98,6 +103,7 @@ def jaque(tab):
             seg = 0
     seg = 1
     mov = 1
+    #Verifica el jaque desde la diagonal abajo derecha
     while seg:
         aux = a + 9*mov
         if (aux < 64 and a/8 == aux/8 - mov):
@@ -115,6 +121,7 @@ def jaque(tab):
             seg = 0
     seg = 1
     mov = 1
+    #Verifica el jaque desde la diagonal arriba izquierda
     while seg:
         aux = a - 9*mov
         if (aux > 0 and a/8 == aux/8 + mov):
@@ -132,6 +139,7 @@ def jaque(tab):
             seg = 0
     seg = 1
     mov = 1
+    #Verifica el jaque desde la diagonal abajo a la izquierda
     while seg:
         aux = a + 7*mov
         if (aux < 64 and a/8 == aux/8 - mov):
@@ -149,6 +157,7 @@ def jaque(tab):
             seg = 0
     seg = 1
     mov = 1
+    #Verifica el jaque desde la diagonal derecha arriba
     while seg:
         aux = a - 7*mov
         if (aux > 0 and a/8 == aux/8 + mov):
@@ -164,6 +173,8 @@ def jaque(tab):
                     seg = 0
         else:
             seg = 0
+
+    #Verifica los jaques para el caballo
     aux = a - 17
     if (aux > 0 and a/8 == aux/8 + 2 and tab.tablero[aux].jugador == tab.strTab[64] and tab.tablero[aux].type().lower() == 'c'):
         print "jaque"
@@ -197,8 +208,8 @@ def jaque(tab):
         print "jaque"
         return 1
     return 0
-    
-        
+
+
 
 #Funcion que imprime un tablero dado
 def imprimirTablero(tab):
