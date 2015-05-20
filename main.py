@@ -348,7 +348,7 @@ def posiblesNegra(origen):
                         agregarGrafo(origen, taux, origen.tablero[auxc].score)
                 auxc = i + 8
                 if (auxc < 56 and origen.tablero[auxc].jugador == "n"):
-                    fin = cad [0:i] + colorCasilla(i) + cad[i+1:auxc] + ficha.type() + cad[auxc+1:]
+                    fin = cad [0:i] + colorCasilla(i) + cad[i+1:auxc] + ficha.type() + cad[auxc+1:64] + '0'
                     taux = chess.Tablero(fin)
                     if (jaque(taux) == 0):
                         agregarGrafo(origen, taux, origen.tablero[auxc].score)
