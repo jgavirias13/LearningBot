@@ -277,7 +277,7 @@ def juegaHM(origen):
                     score = 0
                     if (origen.tablero[ops].jugador == 1):
                         score = score - origen.tablero[ops].score
-                    if (not jaque(taux)):
+                    if (jaque(taux) == 0):
                         agregarGrafo(origen, taux, score)
                     else:
                         print ("No es posible su jugada, quedaria en jaque")
@@ -306,13 +306,13 @@ def posiblesNegra(origen):
                                 if (posicion.jugador == 0):
                                     fin = cad[0:i] + colorCasilla(i) + cad[i+1:aux] + ficha.type() + cad[aux+1:64] + '0'
                                     taux = chess.Tablero(fin)
-                                    if (jaque(taux) == 1):
+                                    if (jaque(taux) == 0):
                                         agregarGrafo(origen, taux, origen.tablero[aux].score)
                                     break
                                 else:
                                     fin = cad[0:i] + colorCasilla(i) + cad[i+1:aux] + ficha.type() + cad[aux+1:64] + '0'
                                     taux = chess.Tablero(fin)
-                                    if (jaque(taux) == 1):
+                                    if (jaque(taux) == 0):
                                         agregarGrafo(origen, taux, origen.tablero[aux].score)
                             else:
                                 break
@@ -322,13 +322,13 @@ def posiblesNegra(origen):
                                 if (posicion.jugador == 0):
                                     fin = cad[0:aux] + ficha.type() + cad[aux+1:i] + colorCasilla(i) + cad[i+1:64] + '0'
                                     taux = chess.Tablero(fin)
-                                    if (jaque(taux) == 1):
+                                    if (jaque(taux) == 0):
                                         agregarGrafo(origen, taux, origen.tablero[aux].score)
                                     break
                                 else:
                                     fin = cad[0:aux] + ficha.type() + cad[aux+1:i] + colorCasilla(i) + cad[i+1:64] + '0'
                                     taux = chess.Tablero(fin)
-                                    if (jaque(taux) == 1):
+                                    if (jaque(taux) == 0):
                                         agregarGrafo(origen, taux, origen.tablero[aux].score)
                             else:
                                 break
@@ -338,19 +338,19 @@ def posiblesNegra(origen):
                 if (auxc/8 - 1 == i/8 and origen.tablero[auxc].jugador == 0):
                     fin = cad [0:i] + colorCasilla(i) + cad[i+1:auxc] + ficha.type() + cad[auxc+1:64] + '0'
                     taux = chess.Tablero(fin)
-                    if (jaque(taux) == 1):
+                    if (jaque(taux) == 0):
                         agregarGrafo(origen, taux, origen.tablero[auxc].score)
                 auxc = i + 9
                 if (auxc/8 - 1 == i/8 and origen.tablero[auxc].jugador == 0):
                     fin = cad [0:i] + colorCasilla(i) + cad[i+1:auxc] + ficha.type() + cad[auxc+1:64] + '0'
                     taux = chess.Tablero(fin)
-                    if (jaque(taux) == 1):
+                    if (jaque(taux) == 0):
                         agregarGrafo(origen, taux, origen.tablero[auxc].score)
                 auxc = i + 8
                 if (auxc < 56 and origen.tablero[auxc].jugador == "n"):
                     fin = cad [0:i] + colorCasilla(i) + cad[i+1:auxc] + ficha.type() + cad[auxc+1:]
                     taux = chess.Tablero(fin)
-                    if (jaque(taux) == 1):
+                    if (jaque(taux) == 0):
                         agregarGrafo(origen, taux, origen.tablero[auxc].score)
                 else:
                     break
@@ -359,36 +359,36 @@ def posiblesNegra(origen):
                     for j in range(len(arr)):
                         fin = cad [0:i] + colorCasilla(i) + cad[i+1:auxc] + arr[j] + cad[auxc+1:64] + '0'
                         taux = chess.Tablero(fin)
-                        if (jaque(taux) == 1):
+                        if (jaque(taux) == 0):
                             agregarGrafo(origen, taux, taux.tablero[auxc].score)
                 auxc = i + 16
                 if (i > 7 and i < 16 and origen.tablero[auxc].jugador == "n"):
                     fin = cad [0:i] + colorCasilla(i) + cad[i+1:auxc] + ficha.type() + cad[auxc+1:64] + '0'
                     taux = chess.Tablero(fin)
-                    if (not jaque(taux)):
+                    if (jaque(taux) == 0):
                         agregarGrafo(origen, taux, origen.tablero[auxc].score)
             elif (cad[i] == 'C'):
                     def compar(aux, mi):
                         if (aux/8 - mi == i/8 and aux < 64 and origen.tablero[aux].jugador == "n"):
                             fin = cad [0:i] + colorCasilla(i) + cad[i+1:aux] + ficha.type() + cad[aux+1:64] + '0'
                             taux = chess.Tablero(fin)
-                            if (not jaque(taux)):
+                            if (jaque(taux) == 0):
                                 agregarGrafo(origen, taux, origen.tablero[aux].score)
                         if (aux/8 - mi == i/8 and aux < 64 and origen.tablero[aux].jugador == 0):
                             fin = cad [0:i] + colorCasilla(i) + cad[i+1:aux] + ficha.type() + cad[aux+1:64] + '0'
                             taux = chess.Tablero(fin)
-                            if (not jaque(taux)):
+                            if (jaque(taux) == 0):
                                 agregarGrafo(origen, taux, origen.tablero[aux].score)
                     def commin(aux, mi):
                         if (aux/8 + mi == i/8 and aux >= 0 and origen.tablero[aux].jugador == "n"):
                             fin = cad [0:aux] + ficha.type() + cad[aux+1:i] + colorCasilla(i) + cad[i+1:64] + '0'
                             taux = chess.Tablero(fin)
-                            if (not jaque(taux)):
+                            if (jaque(taux) == 0):
                                 agregarGrafo(origen, taux, origen.tablero[aux].score)
                         if (aux/8 + mi == i/8 and aux >= 0 and origen.tablero[aux].jugador == "0"):
                             fin = cad [0:aux] + ficha.type() + cad[aux+1:i] + colorCasilla(i) + cad[i+1:64] + '0'
                             taux = chess.Tablero(fin)
-                            if (not jaque(taux)):
+                            if (jaque(taux) == 0):
                                 agregarGrafo(origen, taux, origen.tablero[aux].score)
                     aux = i + 15
                     compar(aux, 2)
