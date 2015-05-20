@@ -219,7 +219,7 @@ def imprimirTablero(tab):
             aux = tab.tablero[i*8+j]
             print aux.tostring(),
         print
-    print ("  a b c d e f g h")
+    print ("  A B C D E F G H")
     print ("-----------------")
     print ("-----------------")
 
@@ -269,7 +269,7 @@ def juegaHM(origen):
                     else:
                         print ("No es posible su jugada, quedaria en jaque")
                         continue
-                    
+
                 else:
                     jugada = origen.strTab[:ops] + origen.tablero[inp].type() + origen.strTab[ops+1:inp] + colorCasilla(inp) + origen.strTab[inp+1:64] + '1'
                     taux = chess.Tablero(jugada)
@@ -332,7 +332,7 @@ def posiblesNegra(origen):
                                         agregarGrafo(origen, taux, origen.tablero[aux].score)
                             else:
                                 break
-                            
+
             elif (cad[i] == 'P'):
                 auxc = i + 7
                 if (auxc/8 - 1 == i/8 and origen.tablero[auxc].jugador == 0):
