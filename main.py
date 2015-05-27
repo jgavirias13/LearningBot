@@ -547,45 +547,50 @@ def posib(origen):
 
 def main():
     if os.path.exists("./infografo.txt"):
-        arch = open('inforgrafo.txt', 'r')
-        linea = arch.readLine()
+        arch = open('./infografo.txt', 'r')
+        linea = arch.readline()
+        posicion = 0
         while linea != "":
-            infotab = linea.readLine()
+            infotab = linea
             tabinfo = infotab[:65]
             puntinfo = infotab[65:]
             n = chess.Tablero(tabinfo)
             n.puntaje = puntinfo
             grafo.append(n)
-            arisinfo = linea.readLine()
+            tabs[tabinfo] = posicion
+            arisinfo = arch.readline()
             i = 0
             listaris = []
             while i < len(arisinfo):
                 aux = ""
-                while arisinfo[i] != "," and i < len(arisinfo):
+                while i < len(arisinfo) and arisinfo[i] != ",":
                     aux = aux + arisinfo[i]
                     i = i+1
-                entero = int(aux)
-                listaris.append(entero)
+                if (aux != '' and aux != '\n'):
+                    print ord(aux)
+                    entero = int(aux)
+                    listaris.append(entero)
                 i = i+1
             aristas.append(listaris)
-        aristas.append(listaris)
+            linea = arch.readline()
+            posicion = posicion + 1
         arch.close()
         os.remove("./infografo.txt")
-    else:
+    if(len(grafo) == 0):
         st = "TCARKACTPPPPPPPPbBbBbBbBBbBbBbBbbBbBbBbBBbBbBbBbpppppppptcarkact0"
         #st = "bBbKbAbBBbBbBbBbbPbPbBbBBbtbBbBRbBbBbBbBBbBbBbBbPBbBbPbBBbBbBbBb1"
         #st = "bBbBbBbBBbBbBbBbbBbBbBbBBbBbBbBBbBbBbBbBBbBbBbBbPBbBbPbBBbBbBbBb1"
         #st = "bBbBbBbBBbBbBbBbbBbBbBbBBbBbBbBbbBbBbBbBBbBbBbBbbBbBbBbRBbBbBbBb1"
         #st = "bBbBbBbBBbBbBbBbbBbBbBbBCbBbBbBbbBbBbBbBBbBbBbBbbBbBbBbCBbBbBbBb1"
         #st = "bbBbBbBbBCbBbBbBpppppppppppppppppppppppppppppCCCPPPppppPPPppPPpp0"
-        #st = "bbbbbbbbbbbbbbbbbbbRRRRbbbbbbbbbbbbbbbbbkbbbbbbbbbbbbbbbbbbbbbbb0"
-        jugar = 1
+        #st = "bbbbbbbbbbbbbbbbbbbrrrrbbbbbbbbbbbbbbbbbKbbbbbbbbbbbbbbbbbbbbbbb0"
         m = chess.Tablero(st)
         tabs[st] = 0
         grafo.append(m)
         a = []
         aristas.append(a)
     archivo = open('infografo.txt', 'w')
+    jugar = 1
     while jugar:
         m = grafo[0]
         b = 1
@@ -636,12 +641,13 @@ def main():
         rpta = raw_input('Desea un nuevo juego? (Y/N):')
         if rpta == "n" or rpta == "N":
             jugar = 0
-    for i in grafo:
+    for i in range(len(grafo)):
+        print grafo[i].puntaje
         cadenaux = grafo[i].strTab + str(grafo[i].puntaje)
         archivo.write(cadenaux)
         archivo.write('\n')
         nodoaux = ""
-        for j in aristas[i]:
+        for j in range(len(aristas[i])):
             nodoaux = nodoaux + str(aristas[i][j]) + ","
         archivo.write(nodoaux)
         archivo.write('\n')
