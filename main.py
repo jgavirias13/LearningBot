@@ -6,6 +6,7 @@ grafo = []
 aristas = []
 tabs = {}
 actual = []
+blancas = []
 
 #Define la funcion del color que debe de ir la casilla cuando esta vacia el tablero
 def colorCasilla(pos):
@@ -40,7 +41,7 @@ def jaque(tab):
                 seg = 0
             else:
                 if (-8) in tab.tablero[aux].come and mov in tab.tablero[aux].movimientos: #Verifica si la casilla que hace el jaque si puede
-                    print "jaque"                                                         #hacer el movimiento para comer
+                                                                                         #hacer el movimiento para comer
                     return 1
                 else:
                     seg = 0
@@ -51,14 +52,13 @@ def jaque(tab):
     #Verifica si hay jaque al rey hacia abajo.
     while seg:
         aux = a - 8*mov
-        if(aux > 0):
+        if(aux >= 0):
             if (tab.tablero[aux].jugador == "n"):
                 mov = mov + 1
             elif (tab.tablero[aux].jugador == jug):
                 seg = 0
             else:
                 if (8) in tab.tablero[aux].come and mov in tab.tablero[aux].movimientos:
-                    print "jaque"
                     return 1
                 else:
                     seg = 0
@@ -77,7 +77,6 @@ def jaque(tab):
                 seg = 0
             else:
                 if (-1) in tab.tablero[aux].come and mov in tab.tablero[aux].movimientos:
-                    print "jaque"
                     return 1
                 else:
                     seg = 0
@@ -95,7 +94,6 @@ def jaque(tab):
                 seg = 0
             else:
                 if (1) in tab.tablero[aux].come and mov in tab.tablero[aux].movimientos:
-                    print "jaque"
                     return 1
                 else:
                     seg = 0
@@ -113,7 +111,6 @@ def jaque(tab):
                 seg = 0
             else:
                 if (-9) in tab.tablero[aux].come and mov in tab.tablero[aux].movimientos:
-                    print "jaque"
                     return 1
                 else:
                     seg = 0
@@ -124,14 +121,13 @@ def jaque(tab):
     #Verifica el jaque desde la diagonal arriba izquierda
     while seg:
         aux = a - 9*mov
-        if (aux > 0 and a/8 == aux/8 + mov):
+        if (aux >= 0 and a/8 == aux/8 + mov):
             if (tab.tablero[aux].jugador == "n"):
                 mov = mov + 1
             elif (tab.tablero[aux].jugador == jug):
                 seg = 0
             else:
                 if (9) in tab.tablero[aux].come and mov in tab.tablero[aux].movimientos:
-                    print "jaque"
                     return 1
                 else:
                     seg = 0
@@ -149,7 +145,6 @@ def jaque(tab):
                 seg = 0
             else:
                 if (-7) in tab.tablero[aux].come and mov in tab.tablero[aux].movimientos:
-                    print "jaque"
                     return 1
                 else:
                     seg = 0
@@ -160,14 +155,13 @@ def jaque(tab):
     #Verifica el jaque desde la diagonal derecha arriba
     while seg:
         aux = a - 7*mov
-        if (aux > 0 and a/8 == aux/8 + mov):
+        if (aux >= 0 and a/8 == aux/8 + mov):
             if (tab.tablero[aux].jugador == "n"):
                 mov = mov + 1
             elif (tab.tablero[aux].jugador == jug):
                 seg = 0
             else:
                 if (7) in tab.tablero[aux].come and mov in tab.tablero[aux].movimientos:
-                    print "jaque"
                     return 1
                 else:
                     seg = 0
@@ -176,36 +170,28 @@ def jaque(tab):
 
     #Verifica los jaques para el caballo
     aux = a - 17
-    if (aux > 0 and a/8 == aux/8 + 2 and tab.tablero[aux].jugador == tab.strTab[64] and tab.tablero[aux].type().lower() == 'c'):
-        print "jaque"
+    if (aux >= 0 and a/8 == aux/8 + 2 and tab.tablero[aux].jugador != jug and tab.tablero[aux].type().lower() == 'c'):
         return 1
     aux = a - 15
-    if (aux > 0 and a/8 == aux/8 + 2 and tab.tablero[aux].jugador == tab.strTab[64] and tab.tablero[aux].type().lower() == 'c'):
-        print "jaque"
+    if (aux >= 0 and a/8 == aux/8 + 2 and tab.tablero[aux].jugador != jug and tab.tablero[aux].type().lower() == 'c'):
         return 1
     aux = a - 10
-    if (aux > 0 and a/8 == aux/8 + 1 and tab.tablero[aux].jugador == tab.strTab[64] and tab.tablero[aux].type().lower() == 'c'):
-        print "jaque"
+    if (aux >= 0 and a/8 == aux/8 + 1 and tab.tablero[aux].jugador != jug and tab.tablero[aux].type().lower() == 'c'):
         return 1
     aux = a - 6
-    if (aux > 0 and a/8 == aux/8 + 1 and tab.tablero[aux].jugador == tab.strTab[64] and tab.tablero[aux].type().lower() == 'c'):
-        print "jaque"
+    if (aux >= 0 and a/8 == aux/8 + 1 and tab.tablero[aux].jugador != jug and tab.tablero[aux].type().lower() == 'c'):
         return 1
     aux = a + 6
-    if (aux < 64 and a/8 == aux/8 - 1 and tab.tablero[aux].jugador == tab.strTab[64] and tab.tablero[aux].type().lower() == 'c'):
-        print "jaque"
+    if (aux < 64 and a/8 == aux/8 - 1 and tab.tablero[aux].jugador != jug and tab.tablero[aux].type().lower() == 'c'):
         return 1
     aux = a + 10
-    if (aux < 64 and a/8 == aux/8 - 1 and tab.tablero[aux].jugador == tab.strTab[64] and tab.tablero[aux].type().lower() == 'c'):
-        print "jaque"
+    if (aux < 64 and a/8 == aux/8 - 1 and tab.tablero[aux].jugador != jug and tab.tablero[aux].type().lower() == 'c'):
         return 1
     aux = a + 17
-    if (aux < 64 and a/8 == aux/8 - 2 and tab.tablero[aux].jugador == tab.strTab[64] and tab.tablero[aux].type().lower() == 'c'):
-        print "jaque"
+    if (aux < 64 and a/8 == aux/8 - 2 and tab.tablero[aux].jugador != jug and tab.tablero[aux].type().lower() == 'c'):
         return 1
     aux = a + 15
-    if (aux <64 and a/8 == aux/8 - 2 and tab.tablero[aux].jugador == tab.strTab[64] and tab.tablero[aux].type().lower() == 'c'):
-        print "jaque"
+    if (aux < 64 and a/8 == aux/8 - 2 and tab.tablero[aux].jugador != jug and tab.tablero[aux].type().lower() == 'c'):
         return 1
     return 0
 
@@ -247,8 +233,15 @@ def juegaHM(origen):
     tbaux = chess.Tablero(cadAux)
     if (jaque(tbaux)):
         print ("Usted esta en jaque")
+    posib(origen)
+    if (len(blancas) == 0):
+        return 0
     while a: 
-        x = raw_input('Su jugada a continuacion, use mayusculas: ')
+        l = raw_input('Su jugada a continuacion: ')
+        if(len(l) != 5):
+            print "Por favor repita su jugada"
+            continue
+        x = l.upper()
         aux = ord(x[0]) - 65
         auxn = 8 - int(x[1])
         inp = auxn*8 + aux
@@ -258,138 +251,270 @@ def juegaHM(origen):
         if(origen.tablero[inp].jugador == 0):
             if (origen.tablero[ops].jugador != 0):
                 taux = 0
-                if (inp < ops):
-                    jugada = origen.strTab[:inp] + colorCasilla(inp) + origen.strTab[inp+1:ops] + origen.tablero[inp].type() + origen.strTab[ops+1:64] + '1'
-                    taux = chess.Tablero(jugada)
-                    score = 0
-                    if (origen.tablero[ops].jugador == 1):
-                        score = score - origen.tablero[ops].score
-                    if (not jaque(taux)):
-                        agregarGrafo(origen, taux, score)
-                    else:
-                        print ("No es posible su jugada, quedaria en jaque")
+                ficha = origen.tablero[inp]
+                if (ficha.type() == 'p' and ops < 8):
+                    f = raw_input('Que ficha desea coronar (c/a/t/r): ')
+                    jugada = origen.strTab[:inp] + colorCasilla(inp) + origen.strTab[inp+1:ops] + f + origen.strTab[ops+1:64] + '1'
+                    if (not jugada in blancas):
+                        print ("No es posible su jugada")
                         continue
-
                 else:
-                    jugada = origen.strTab[:ops] + origen.tablero[inp].type() + origen.strTab[ops+1:inp] + colorCasilla(inp) + origen.strTab[inp+1:64] + '1'
-                    taux = chess.Tablero(jugada)
-                    taux = chess.Tablero(jugada)
-                    score = 0
-                    if (origen.tablero[ops].jugador == 1):
-                        score = score - origen.tablero[ops].score
-                    if (jaque(taux) == 0):
-                        agregarGrafo(origen, taux, score)
+                    if (inp < ops):
+                        jugada = origen.strTab[:inp] + colorCasilla(inp) + origen.strTab[inp+1:ops] + origen.tablero[inp].type() + origen.strTab[ops+1:64] + '1'
+                        taux = chess.Tablero(jugada)
+                        score = 0
+                        if (origen.tablero[ops].jugador == 1):
+                            score = score - origen.tablero[ops].score
+                        if (jugada in blancas):
+                            agregarGrafo(origen, taux, score)
+                        else:
+                            print ("No es posible su jugada")
+                            continue
+    
                     else:
-                        print ("No es posible su jugada, quedaria en jaque")
-                        continue
-                a = 0
-                return taux
+                        jugada = origen.strTab[:ops] + origen.tablero[inp].type() + origen.strTab[ops+1:inp] + colorCasilla(inp) + origen.strTab[inp+1:64] + '1'
+                        taux = chess.Tablero(jugada)
+                        taux = chess.Tablero(jugada)
+                        score = 0
+                        if (origen.tablero[ops].jugador == 1):
+                            score = score - origen.tablero[ops].score
+                        if (jugada in blancas):
+                            agregarGrafo(origen, taux, score)
+                        else:
+                            print ("No es posible su jugada")
+                            continue
+                    a = 0
+                    return taux
             else:
                 print ("Error, no es posible moverse a esta posicion")
         else:
             print ("Error, no es posible mover esta ficha")
-def posiblesNegra(origen):
+def posib(origen):
     #Funciones que crean las fichas y las agregan a tablero
     cad = origen.strTab
+    jug = 0
+    if origen.strTab[64] == '1':
+        jug = 1
     for i in range (len(cad)-1):
         ficha = origen.tablero[i]
-        if (cad[i] != 'b' and cad[i] != 'B' and ficha.color == "Negro"):
-            if (ficha.type() != 'C' and ficha.type() != 'P'):
+        if (cad[i] != 'b' and cad[i] != 'B' and ficha.jugador == jug):
+            if (ficha.type() != 'C' and ficha.type() != 'P' and ficha.type() != 'c' and ficha.type() != 'p'):
                 for j in range (len(ficha.direccion)):
                     for k in range (len(ficha.movimientos)):
                         direc = ficha.direccion[j]
                         movi = ficha.movimientos[k]
                         aux = i+(direc*movi)
-                        if ((direc == 8 and aux < 64) or ((direc == 7 or direc == 9) and (aux < 64 and (aux/8 - movi == i/8)))):
+                        if ((direc == 1 and aux/8 == i/8) or (direc == 8 and aux < 64) or ((direc == 7 or direc == 9) and (aux < 64 and (aux/8 - movi == i/8)))):
                             posicion = origen.tablero[aux]
-                            if (posicion.jugador != 1):
-                                if (posicion.jugador == 0):
-                                    fin = cad[0:i] + colorCasilla(i) + cad[i+1:aux] + ficha.type() + cad[aux+1:64] + '0'
-                                    taux = chess.Tablero(fin)
-                                    if (jaque(taux) == 0):
-                                        agregarGrafo(origen, taux, origen.tablero[aux].score)
-                                    break
+                            if (origen.strTab[64] == '1'):
+                                if (posicion.jugador != 1):
+                                    if (posicion.jugador == 0):
+                                        fin = cad[0:i] + colorCasilla(i) + cad[i+1:aux] + ficha.type() + cad[aux+1:64] + '0'
+                                        taux = chess.Tablero(fin)
+                                        if (jaque(taux) == 0):
+                                            agregarGrafo(origen, taux, origen.tablero[aux].score)
+                                        break
+                                    else:
+                                        fin = cad[0:i] + colorCasilla(i) + cad[i+1:aux] + ficha.type() + cad[aux+1:64] + '0'
+                                        taux = chess.Tablero(fin)
+                                        if (jaque(taux) == 0):
+                                            agregarGrafo(origen, taux, 0)
                                 else:
-                                    fin = cad[0:i] + colorCasilla(i) + cad[i+1:aux] + ficha.type() + cad[aux+1:64] + '0'
-                                    taux = chess.Tablero(fin)
-                                    if (jaque(taux) == 0):
-                                        agregarGrafo(origen, taux, origen.tablero[aux].score)
-                            else:
-                                break
+                                    break
+                            elif (origen.strTab[64] == '0'):
+                                if (posicion.jugador != 0):
+                                    if (posicion.jugador == 0):
+                                        fin = cad[0:i] + colorCasilla(i) + cad[i+1:aux] + ficha.type() + cad[aux+1:64] + '1'
+                                        taux = chess.Tablero(fin)
+                                        if (jaque(taux) == 0):
+                                            blancas.append(fin)
+                                        break
+                                    else:
+                                        fin = cad[0:i] + colorCasilla(i) + cad[i+1:aux] + ficha.type() + cad[aux+1:64] + '1'
+                                        taux = chess.Tablero(fin)
+                                        if (jaque(taux) == 0):
+                                            blancas.append(fin)
+                                else:
+                                    break
                         elif ((direc == -1 and aux/8 == i/8) or (direc == -8 and aux >= 0) or ((direc == -9 or direc == -7) and (aux >=0 and (aux/8 + movi == i/8)))):
                             posicion = origen.tablero[aux]
-                            if (posicion.jugador != 1):
-                                if (posicion.jugador == 0):
-                                    fin = cad[0:aux] + ficha.type() + cad[aux+1:i] + colorCasilla(i) + cad[i+1:64] + '0'
-                                    taux = chess.Tablero(fin)
-                                    if (jaque(taux) == 0):
-                                        agregarGrafo(origen, taux, origen.tablero[aux].score)
-                                    break
+                            if (origen.strTab[64] == '1'):
+                                if (posicion.jugador != 1):
+                                    if (posicion.jugador == 0):
+                                        fin = cad[0:aux] + ficha.type() + cad[aux+1:i] + colorCasilla(i) + cad[i+1:64] + '0'
+                                        taux = chess.Tablero(fin)
+                                        if (jaque(taux) == 0):
+                                            agregarGrafo(origen, taux, origen.tablero[aux].score)
+                                        break
+                                    else:
+                                        fin = cad[0:aux] + ficha.type() + cad[aux+1:i] + colorCasilla(i) + cad[i+1:64] + '0'
+                                        taux = chess.Tablero(fin)
+                                        if (jaque(taux) == 0):
+                                            agregarGrafo(origen, taux, 0)
                                 else:
-                                    fin = cad[0:aux] + ficha.type() + cad[aux+1:i] + colorCasilla(i) + cad[i+1:64] + '0'
-                                    taux = chess.Tablero(fin)
-                                    if (jaque(taux) == 0):
-                                        agregarGrafo(origen, taux, origen.tablero[aux].score)
-                            else:
-                                break
-
+                                    break
+                            elif (origen.strTab[64] == '0'):
+                                if (posicion.jugador != 0):
+                                    if (posicion.jugador == 0):
+                                        fin = cad[0:aux] + ficha.type() + cad[aux+1:i] + colorCasilla(i) + cad[i+1:64] + '1'
+                                        taux = chess.Tablero(fin)
+                                        if (jaque(taux) == 0):
+                                            blancas.append(fin)
+                                        break
+                                    else:
+                                        fin = cad[0:aux] + ficha.type() + cad[aux+1:i] + colorCasilla(i) + cad[i+1:64] + '1'
+                                        taux = chess.Tablero(fin)
+                                        if (jaque(taux) == 0):
+                                            blancas.append(fin)
+                                else:
+                                    break
             elif (cad[i] == 'P'):
                 auxc = i + 7
-                if (auxc/8 - 1 == i/8 and origen.tablero[auxc].jugador == 0):
-                    fin = cad [0:i] + colorCasilla(i) + cad[i+1:auxc] + ficha.type() + cad[auxc+1:64] + '0'
-                    taux = chess.Tablero(fin)
-                    if (jaque(taux) == 0):
-                        agregarGrafo(origen, taux, origen.tablero[auxc].score)
+                if (auxc/8 - 1 == i/8 and auxc < 64 and origen.tablero[auxc].jugador == 0):
+                    if (auxc < 56):
+                        fin = cad [0:i] + colorCasilla(i) + cad[i+1:auxc] + ficha.type() + cad[auxc+1:64] + '0'
+                        taux = chess.Tablero(fin)
+                        if (jaque(taux) == 0):
+                            agregarGrafo(origen, taux, origen.tablero[auxc].score)
+                    else:
+                        arr = ['C', 'A', 'T', 'R']
+                        for j in range(len(arr)):
+                            fin = cad [0:i] + colorCasilla(i) + cad[i+1:auxc] + arr[j] + cad[auxc+1:64] + '0'
+                            taux = chess.Tablero(fin)
+                            if (jaque(taux) == 0):
+                                agregarGrafo(origen, taux, taux.tablero[auxc].score + origen.tablero[auxc].score)
                 auxc = i + 9
-                if (auxc/8 - 1 == i/8 and origen.tablero[auxc].jugador == 0):
-                    fin = cad [0:i] + colorCasilla(i) + cad[i+1:auxc] + ficha.type() + cad[auxc+1:64] + '0'
-                    taux = chess.Tablero(fin)
-                    if (jaque(taux) == 0):
-                        agregarGrafo(origen, taux, origen.tablero[auxc].score)
+                if (auxc/8 - 1 == i/8 and auxc < 64 and origen.tablero[auxc].jugador == 0):
+                    if (auxc < 56):
+                        fin = cad [0:i] + colorCasilla(i) + cad[i+1:auxc] + ficha.type() + cad[auxc+1:64] + '0'
+                        taux = chess.Tablero(fin)
+                        if (jaque(taux) == 0):
+                            agregarGrafo(origen, taux, origen.tablero[auxc].score)
+                    else:
+                        arr = ['C', 'A', 'T', 'R']
+                        for j in range(len(arr)):
+                            fin = cad [0:i] + colorCasilla(i) + cad[i+1:auxc] + arr[j] + cad[auxc+1:64] + '0'
+                            taux = chess.Tablero(fin)
+                            if (jaque(taux) == 0):
+                                agregarGrafo(origen, taux, taux.tablero[auxc].score + origen.tablero[auxc].score)
                 auxc = i + 8
                 if (auxc < 56 and origen.tablero[auxc].jugador == "n"):
                     fin = cad [0:i] + colorCasilla(i) + cad[i+1:auxc] + ficha.type() + cad[auxc+1:64] + '0'
                     taux = chess.Tablero(fin)
                     if (jaque(taux) == 0):
-                        agregarGrafo(origen, taux, origen.tablero[auxc].score)
-                else:
-                    break
+                        agregarGrafo(origen, taux, 0)
                 if (auxc > 55 and auxc < 64 and origen.tablero[auxc].jugador == "n"):
-                    arr = ['c', 'a', 't', 'r']
+                    arr = ['C', 'A', 'T', 'R']
                     for j in range(len(arr)):
                         fin = cad [0:i] + colorCasilla(i) + cad[i+1:auxc] + arr[j] + cad[auxc+1:64] + '0'
                         taux = chess.Tablero(fin)
                         if (jaque(taux) == 0):
                             agregarGrafo(origen, taux, taux.tablero[auxc].score)
-                auxc = i + 16
-                if (i > 7 and i < 16 and origen.tablero[auxc].jugador == "n"):
-                    fin = cad [0:i] + colorCasilla(i) + cad[i+1:auxc] + ficha.type() + cad[auxc+1:64] + '0'
+                auxd = i + 16
+                if (i > 7 and i < 16 and origen.tablero[auxd].jugador == "n" and origen.tablero[auxc].jugador == "n"):
+                    fin = cad [0:i] + colorCasilla(i) + cad[i+1:auxd] + ficha.type() + cad[auxd+1:64] + '0'
                     taux = chess.Tablero(fin)
                     if (jaque(taux) == 0):
-                        agregarGrafo(origen, taux, origen.tablero[auxc].score)
-            elif (cad[i] == 'C'):
+                        agregarGrafo(origen, taux, 0)
+            elif (cad[i] == 'p'):
+                auxc = i - 7
+                if (auxc/8 + 1 == i/8 and auxc >= 0 and origen.tablero[auxc].jugador == 1):
+                    if (auxc > 7):
+                        fin = cad [0:auxc] + ficha.type() + cad[auxc+1:i] + colorCasilla(i) + cad[i+1:64] + '1'
+                        taux = chess.Tablero(fin)
+                        if (jaque(taux) == 0):
+                            blancas.append(fin)
+                    else:
+                        arr = ['c', 'a', 't', 'r']
+                        for j in range(len(arr)):
+                            fin = cad [0:auxc] + arr[j] + cad[auxc+1:i] + colorCasilla(i) + cad[i+1:64] + '1'
+                            taux = chess.Tablero(fin)
+                            if (jaque(taux) == 0):
+                                blancas.append(fin)
+                auxc = i - 9
+                if (auxc/8 + 1 == i/8 and auxc >= 0 and origen.tablero[auxc].jugador == 0):
+                    if (auxc > 7):
+                        fin = cad [0:auxc] + ficha.type() + cad[auxc+1:i] + colorCasilla(i) + cad[i+1:64] + '1'
+                        taux = chess.Tablero(fin)
+                        if (jaque(taux) == 0):
+                            blancas.append(fin)
+                    else:
+                        arr = ['c', 'a', 't', 'r']
+                        for j in range(len(arr)):
+                            fin = cad [0:auxc] + arr[j] + cad[auxc+1:i] + colorCasilla(i) + cad[i+1:64] + '1'
+                            taux = chess.Tablero(fin)
+                            if (jaque(taux) == 0):
+                                blancas.append(fin)
+                auxc = i - 8
+                if (auxc >= 0 and origen.tablero[auxc].jugador == "n"):
+                    fin = cad [0:auxc] + ficha.type() + cad[auxc+1:i] + colorCasilla(i) + cad[i+1:64] + '1'
+                    taux = chess.Tablero(fin)
+                    if (jaque(taux) == 0):
+                        blancas.append(fin)
+                if (auxc >= 0 and auxc < 8 and origen.tablero[auxc].jugador == "n"):
+                    arr = ['C', 'A', 'T', 'R']
+                    for j in range(len(arr)):
+                        fin = cad [0:auxc] + arr[j] + cad[auxc+1:i] + colorCasilla(i) + cad[i+1:64] + '1'
+                        taux = chess.Tablero(fin)
+                        if (jaque(taux) == 0):
+                            blancas.append(fin)
+                auxd = i - 16
+                if (i > 47 and i < 56 and origen.tablero[auxd].jugador == "n" and origen.tablero[auxc].jugador == "n"):
+                    fin = cad [0:auxd] + ficha.type() + cad[auxd+1:i] + colorCasilla(i) + cad[i+1:64] + '1'
+                    taux = chess.Tablero(fin)
+                    if (jaque(taux) == 0):
+                        blancas.append(fin)
+            elif (cad[i] == 'C' or cad[i] == 'c'):
                     def compar(aux, mi):
                         if (aux/8 - mi == i/8 and aux < 64 and origen.tablero[aux].jugador == "n"):
-                            fin = cad [0:i] + colorCasilla(i) + cad[i+1:aux] + ficha.type() + cad[aux+1:64] + '0'
+                            fin = cad [0:i] + colorCasilla(i) + cad[i+1:aux] + ficha.type() + cad[aux+1:64]
+                            if (origen.strTab[64] == '1'):
+                                fin = fin + '0'
+                            else:
+                                fin = fin + '1'
                             taux = chess.Tablero(fin)
                             if (jaque(taux) == 0):
-                                agregarGrafo(origen, taux, origen.tablero[aux].score)
-                        if (aux/8 - mi == i/8 and aux < 64 and origen.tablero[aux].jugador == 0):
-                            fin = cad [0:i] + colorCasilla(i) + cad[i+1:aux] + ficha.type() + cad[aux+1:64] + '0'
+                                if (origen.strTab[64] == '1'):
+                                    agregarGrafo(origen, taux, 0)
+                                else:
+                                    blancas.append(fin)
+                        elif (aux/8 - mi == i/8 and aux < 64 and origen.tablero[aux].jugador == 0):
+                            fin = cad [0:i] + colorCasilla(i) + cad[i+1:aux] + ficha.type() + cad[aux+1:64]
+                            if (origen.strTab[64] == '1'):
+                                fin = fin + '0'
+                            else:
+                                fin = fin + '1'
                             taux = chess.Tablero(fin)
                             if (jaque(taux) == 0):
-                                agregarGrafo(origen, taux, origen.tablero[aux].score)
+                                if (origen.strTab[64] == '1'):
+                                    agregarGrafo(origen, taux, origen.tablero[aux].score)
+                                else:
+                                    blancas.append(fin)
                     def commin(aux, mi):
                         if (aux/8 + mi == i/8 and aux >= 0 and origen.tablero[aux].jugador == "n"):
-                            fin = cad [0:aux] + ficha.type() + cad[aux+1:i] + colorCasilla(i) + cad[i+1:64] + '0'
+                            fin = cad [0:aux] + ficha.type() + cad[aux+1:i] + colorCasilla(i) + cad[i+1:64]
+                            if (origen.strTab[64] == '1'):
+                                fin = fin + '0'
+                            else:
+                                fin = fin + '1'
                             taux = chess.Tablero(fin)
                             if (jaque(taux) == 0):
-                                agregarGrafo(origen, taux, origen.tablero[aux].score)
+                                if (origen.strTab[64] == '1'):
+                                    agregarGrafo(origen, taux, 0)
+                                else:
+                                    blancas.append(fin)
                         if (aux/8 + mi == i/8 and aux >= 0 and origen.tablero[aux].jugador == "0"):
-                            fin = cad [0:aux] + ficha.type() + cad[aux+1:i] + colorCasilla(i) + cad[i+1:64] + '0'
+                            fin = cad [0:aux] + ficha.type() + cad[aux+1:i] + colorCasilla(i) + cad[i+1:64]
+                            if (origen.strTab[64] == '1'):
+                                fin = fin + '0'
+                            else:
+                                fin = fin + '1'
                             taux = chess.Tablero(fin)
                             if (jaque(taux) == 0):
-                                agregarGrafo(origen, taux, origen.tablero[aux].score)
+                                if (origen.strTab[64] == '1'):
+                                    agregarGrafo(origen, taux, origen.tablero[aux].score)
+                                else:
+                                    blancas.append(fin)
                     aux = i + 15
                     compar(aux, 2)
                     aux = i + 17
@@ -413,7 +538,8 @@ def main():
     #st = "bBbBbBbBBbBbBbBbbBbBbBbBBbBbBbBBbBbBbBbBBbBbBbBbPBbBbPbBBbBbBbBb1"
     #st = "bBbBbBbBBbBbBbBbbBbBbBbBBbBbBbBbbBbBbBbBBbBbBbBbbBbBbBbRBbBbBbBb1"
     #st = "bBbBbBbBBbBbBbBbbBbBbBbBCbBbBbBbbBbBbBbBBbBbBbBbbBbBbBbCBbBbBbBb1"
-    #st = "bbBbBbBbBCbBbBbBpppppppppppppppppppppppppppppCCCPPPppppPPPppPPppp0"
+    #st = "bbBbBbBbBCbBbBbBpppppppppppppppppppppppppppppCCCPPPppppPPPppPPpp0"
+    #st = "bbbbbbbbbbbbbbbbbbbRRRRbbbbbbbbbbbbbbbbbkbbbbbbbbbbbbbbbbbbbbbbb0"
     jugar = 1
     m = chess.Tablero(st)
     tabs[st] = 0
@@ -424,16 +550,18 @@ def main():
         m = grafo[0]
         b = 1
         while b:
+            blancas = []
             actual.append(tabs[m.strTab])
             juego = juegaHM(m)
-            posiblesNegra(juego)
+            if juego == 0:
+                print ('Jaque mate, gana learningbot')
+                grafo[tabs[m.strTab]].puntaje = grafo[tabs[m.strTab]].puntaje + 20
+                break
+            posib(juego)
             pos = tabs[juego.strTab]
             actual.append(pos)
             posibles = []
             maximo = 0
-            if (len(aristas[pos]) == 0):
-                print ("Juego terminado")
-                b = 0
             for i in range(len(aristas[pos])):
                 tabAux = grafo[aristas[pos][i]]
                 if (tabAux.puntaje == maximo):
@@ -442,8 +570,18 @@ def main():
                     posibles = []
                     posibles.append(tabAux)
                     maximo = tabAux.puntaje
-            ran = random.randrange(len(posibles))
-            m = posibles[ran]
+            if (len(posibles) == 0):
+                imprimirTablero(juego)
+                mate = chess.Tablero(juego.strTab[:64] + '0')
+                if (jaque(mate)):
+                    print('Jaque mate, gana jugador humano')
+                else:
+                    print('Tablas')
+                b = 0
+                grafo[pos].puntaje = grafo[pos].puntaje - 20
+            else:
+                ran = random.randrange(len(posibles))
+                m = posibles[ran]
         suma = 0
         for i in range(len(actual)):
             aux = len(actual) - i - 1
@@ -452,5 +590,5 @@ def main():
             grafo[actual[aux]].puntaje = suma
         rpta = raw_input('Desea un nuevo juego? (Y/N):')
         if rpta == "n" or rpta == "N":
-            juegar = 0
+            jugar = 0
 main()
