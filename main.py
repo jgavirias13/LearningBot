@@ -301,8 +301,10 @@ def posib(origen):
     #Funcion para crear todos los posibles movimientos en un tablero
     cad = origen.strTab
     jug = 0
+    op = 1
     if origen.strTab[64] == '1':
         jug = 1
+        op = 0
     for i in range (len(cad)-1):
         ficha = origen.tablero[i]
         #Se recorre todas las casillas del tablero y se verifica que esta pertenezca al jugador, para luego crear todos los tableros con los movimientos de esta ficha
@@ -488,7 +490,7 @@ def posib(origen):
                                     agregarGrafo(origen, taux, 0)
                                 else:
                                     blancas.append(fin)
-                        elif (aux/8 - mi == i/8 and aux < 64 and origen.tablero[aux].jugador == 0):
+                        elif (aux/8 - mi == i/8 and aux < 64 and origen.tablero[aux].jugador == op):
                             fin = cad [0:i] + colorCasilla(i) + cad[i+1:aux] + ficha.type() + cad[aux+1:64]
                             if (origen.strTab[64] == '1'):
                                 fin = fin + '0'
@@ -513,7 +515,7 @@ def posib(origen):
                                     agregarGrafo(origen, taux, 0)
                                 else:
                                     blancas.append(fin)
-                        if (aux/8 + mi == i/8 and aux >= 0 and origen.tablero[aux].jugador == "0"):
+                        if (aux/8 + mi == i/8 and aux >= 0 and origen.tablero[aux].jugador == op):
                             fin = cad [0:aux] + ficha.type() + cad[aux+1:i] + colorCasilla(i) + cad[i+1:64]
                             if (origen.strTab[64] == '1'):
                                 fin = fin + '0'
