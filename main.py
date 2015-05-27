@@ -1,6 +1,7 @@
 import chess
 import fichas
 import random
+import os.path
 
 grafo = []
 aristas = []
@@ -545,19 +546,46 @@ def posib(origen):
                     commin(aux, 2)
 
 def main():
-    st = "TCARKACTPPPPPPPPbBbBbBbBBbBbBbBbbBbBbBbBBbBbBbBbpppppppptcarkact0"
-    #st = "bBbKbAbBBbBbBbBbbPbPbBbBBbtbBbBRbBbBbBbBBbBbBbBbPBbBbPbBBbBbBbBb1"
-    #st = "bBbBbBbBBbBbBbBbbBbBbBbBBbBbBbBBbBbBbBbBBbBbBbBbPBbBbPbBBbBbBbBb1"
-    #st = "bBbBbBbBBbBbBbBbbBbBbBbBBbBbBbBbbBbBbBbBBbBbBbBbbBbBbBbRBbBbBbBb1"
-    #st = "bBbBbBbBBbBbBbBbbBbBbBbBCbBbBbBbbBbBbBbBBbBbBbBbbBbBbBbCBbBbBbBb1"
-    #st = "bbBbBbBbBCbBbBbBpppppppppppppppppppppppppppppCCCPPPppppPPPppPPpp0"
-    #st = "bbbbbbbbbbbbbbbbbbbRRRRbbbbbbbbbbbbbbbbbkbbbbbbbbbbbbbbbbbbbbbbb0"
-    jugar = 1
-    m = chess.Tablero(st)
-    tabs[st] = 0
-    grafo.append(m)
-    a = []
-    aristas.append(a)
+    if os.path.exists("./infografo.txt"):
+        arch = open('inforgrafo.txt', 'r')
+        linea = arch.readLine()
+        while linea != "":
+            infotab = linea.readLine()
+            tabinfo = infotab[:65]
+            puntinfo = infotab[65:]
+            n = chess.Tablero(tabinfo)
+            n.puntaje = puntinfo
+            grafo.append(n)
+            arisinfo = linea.readLine()
+            i = 0
+            listaris = []
+            while i < len(arisinfo):
+                aux = ""
+                while arisinfo[i] != "," and i < len(arisinfo):
+                    aux = aux + arisinfo[i]
+                    i = i+1
+                entero = int(aux)
+                listaris.append(entero)
+                i = i+1
+            aristas.append(listaris)
+        aristas.append(listaris)
+        arch.close()
+        os.remove("./infografo.txt")
+    else:
+        st = "TCARKACTPPPPPPPPbBbBbBbBBbBbBbBbbBbBbBbBBbBbBbBbpppppppptcarkact0"
+        #st = "bBbKbAbBBbBbBbBbbPbPbBbBBbtbBbBRbBbBbBbBBbBbBbBbPBbBbPbBBbBbBbBb1"
+        #st = "bBbBbBbBBbBbBbBbbBbBbBbBBbBbBbBBbBbBbBbBBbBbBbBbPBbBbPbBBbBbBbBb1"
+        #st = "bBbBbBbBBbBbBbBbbBbBbBbBBbBbBbBbbBbBbBbBBbBbBbBbbBbBbBbRBbBbBbBb1"
+        #st = "bBbBbBbBBbBbBbBbbBbBbBbBCbBbBbBbbBbBbBbBBbBbBbBbbBbBbBbCBbBbBbBb1"
+        #st = "bbBbBbBbBCbBbBbBpppppppppppppppppppppppppppppCCCPPPppppPPPppPPpp0"
+        #st = "bbbbbbbbbbbbbbbbbbbRRRRbbbbbbbbbbbbbbbbbkbbbbbbbbbbbbbbbbbbbbbbb0"
+        jugar = 1
+        m = chess.Tablero(st)
+        tabs[st] = 0
+        grafo.append(m)
+        a = []
+        aristas.append(a)
+    archivo = open('infografo.txt', 'w')
     while jugar:
         m = grafo[0]
         b = 1
@@ -608,4 +636,14 @@ def main():
         rpta = raw_input('Desea un nuevo juego? (Y/N):')
         if rpta == "n" or rpta == "N":
             jugar = 0
+    for i in grafo:
+        cadenaux = grafo[i].strTab + str(grafo[i].puntaje)
+        archivo.write(cadenaux)
+        archivo.write('\n')
+        nodoaux = ""
+        for j in aristas[i]:
+            nodoaux = nodoaux + str(aristas[i][j]) + ","
+        archivo.write(nodoaux)
+        archivo.write('\n')
+    archivo.close()
 main()
