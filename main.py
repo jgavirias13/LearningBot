@@ -231,12 +231,17 @@ def juegaHM(origen):
     a = 1
     cadAux = origen.strTab[:64] + '1'
     tbaux = chess.Tablero(cadAux)
+    jaq = 0
     if (jaque(tbaux)):
+        jaq = 1
         print ("Usted esta en jaque")
     posib(origen)
     #Llama a la funcion posib para sacar todas las posibles jugadas que puede hacer el humano, para determinar si esta en jaque
     if (len(blancas) == 0):
-        return 0
+        if jaq:
+            return 0
+        else: 
+            return 1
     while a: 
         l = raw_input('Su jugada a continuacion: ')
         if(len(l) != 5):
@@ -437,7 +442,7 @@ def posib(origen):
                             if (jaque(taux) == 0):
                                 blancas.append(fin)
                 auxc = i - 9
-                if (auxc/8 + 1 == i/8 and auxc >= 0 and origen.tablero[auxc].jugador == 0):
+                if (auxc/8 + 1 == i/8 and auxc >= 0 and origen.tablero[auxc].jugador == 1):
                     if (auxc > 7):
                         fin = cad [0:auxc] + ficha.type() + cad[auxc+1:i] + colorCasilla(i) + cad[i+1:64] + '1'
                         taux = chess.Tablero(fin)
@@ -562,6 +567,10 @@ def main():
                 print ('Jaque mate, gana learningbot')
                 grafo[tabs[m.strTab]].puntaje = grafo[tabs[m.strTab]].puntaje + 20
                 break
+            elif juego == 1:
+                print ('Tablas, Rey blanco ahogado')
+                grafo[tabs[m.strTab]].puntaje = grafo[tabs[m.strTab]].puntaje + 5
+                break
             posib(juego)
             pos = tabs[juego.strTab]
             actual.append(pos)
@@ -580,10 +589,11 @@ def main():
                 mate = chess.Tablero(juego.strTab[:64] + '0')
                 if (jaque(mate)):
                     print('Jaque mate, gana jugador humano')
+                    grafo[pos].puntaje = grafo[pos].puntaje - 20
                 else:
-                    print('Tablas')
+                    print('Tablas, Rey negro ahogado')
+                    grafo[pos].puntaje = grafo[pos].puntaje + 5
                 b = 0
-                grafo[pos].puntaje = grafo[pos].puntaje - 20
             else:
                 ran = random.randrange(len(posibles))
                 m = posibles[ran]
