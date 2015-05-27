@@ -234,6 +234,7 @@ def juegaHM(origen):
     if (jaque(tbaux)):
         print ("Usted esta en jaque")
     posib(origen)
+    #Llama a la funcion posib para sacar todas las posibles jugadas que puede hacer el humano, para determinar si esta en jaque
     if (len(blancas) == 0):
         return 0
     while a: 
@@ -242,6 +243,7 @@ def juegaHM(origen):
             print "Por favor repita su jugada"
             continue
         x = l.upper()
+        #Se pone en mayusculas la cadena entrada para poder evaluar
         aux = ord(x[0]) - 65
         auxn = 8 - int(x[1])
         inp = auxn*8 + aux
@@ -252,6 +254,7 @@ def juegaHM(origen):
             if (origen.tablero[ops].jugador != 0):
                 taux = 0
                 ficha = origen.tablero[inp]
+                #Ver si el humano va a coronar
                 if (ficha.type() == 'p' and ops < 8):
                     f = raw_input('Que ficha desea coronar (c/a/t/r): ')
                     jugada = origen.strTab[:inp] + colorCasilla(inp) + origen.strTab[inp+1:ops] + f + origen.strTab[ops+1:64] + '1'
@@ -259,6 +262,7 @@ def juegaHM(origen):
                         print ("No es posible su jugada")
                         continue
                 else:
+                    #Se crea el tablero con la jugada propuesta por el humano
                     if (inp < ops):
                         jugada = origen.strTab[:inp] + colorCasilla(inp) + origen.strTab[inp+1:ops] + origen.tablero[inp].type() + origen.strTab[ops+1:64] + '1'
                         taux = chess.Tablero(jugada)
@@ -270,7 +274,6 @@ def juegaHM(origen):
                         else:
                             print ("No es posible su jugada")
                             continue
-    
                     else:
                         jugada = origen.strTab[:ops] + origen.tablero[inp].type() + origen.strTab[ops+1:inp] + colorCasilla(inp) + origen.strTab[inp+1:64] + '1'
                         taux = chess.Tablero(jugada)
@@ -290,17 +293,19 @@ def juegaHM(origen):
         else:
             print ("Error, no es posible mover esta ficha")
 def posib(origen):
-    #Funciones que crean las fichas y las agregan a tablero
+    #Funcion para crear todos los posibles movimientos en un tablero
     cad = origen.strTab
     jug = 0
     if origen.strTab[64] == '1':
         jug = 1
     for i in range (len(cad)-1):
         ficha = origen.tablero[i]
+        #Se recorre todas las casillas del tablero y se verifica que esta pertenezca al jugador, para luego crear todos los tableros con los movimientos de esta ficha
         if (cad[i] != 'b' and cad[i] != 'B' and ficha.jugador == jug):
             if (ficha.type() != 'C' and ficha.type() != 'P' and ficha.type() != 'c' and ficha.type() != 'p'):
                 for j in range (len(ficha.direccion)):
                     for k in range (len(ficha.movimientos)):
+                        #Se recorre la cantidad de movimientos y la direccion que pueden tomar estos, verifica cual de estas es y crea el tablero
                         direc = ficha.direccion[j]
                         movi = ficha.movimientos[k]
                         aux = i+(direc*movi)
