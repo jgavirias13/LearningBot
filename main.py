@@ -93,7 +93,7 @@ def main():
                     posibles.append(tabAux)
                     maximo = tabAux.puntaje
             if (len(posibles) == 0):
-                imprimirTablero(juego)
+                turno.imprimirTablero(juego)
                 mate = chess.Tablero(juego.strTab[:64] + '0')
                 if (turno.jaque(mate)):
                     print('Jaque mate, gana jugador humano')
