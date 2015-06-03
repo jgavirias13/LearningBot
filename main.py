@@ -1,5 +1,5 @@
 #Archivo de inicializacion del programa
-#Desde aquí se carga la memoria guardada anterior
+#Desde aqui se carga la memoria guardada anterior
 #Y se crea la memoria al final de la ejecución
 import chess
 import fichas
