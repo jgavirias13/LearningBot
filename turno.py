@@ -1,3 +1,6 @@
+import chess
+import fichas
+import random
 grafo = []
 aristas = []
 tabs = {}
