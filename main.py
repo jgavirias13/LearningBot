@@ -45,7 +45,7 @@ def main():
         os.remove("./infografo.txt")
     #Se verifica si no se cargo ninguna informacion de la memoria
     #Si esto sucede se agrega el tablero inicial
-    if(len(grafo) == 0):
+    if(len(turno.grafo) == 0):
         st = "TCARKACTPPPPPPPPbBbBbBbBBbBbBbBbbBbBbBbBBbBbBbBbpppppppptcarkact0"
         #st = "bBbKbAbBBbBbBbBbbPbPbBbBBbtbBbBRbBbBbBbBBbBbBbBbPBbBbPbBBbBbBbBb1"
         #st = "bBbBbBbBBbBbBbBbbBbBbBbBBbBbBbBBbBbBbBbBBbBbBbBbPBbBbPbBBbBbBbBb1"
