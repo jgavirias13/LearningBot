@@ -71,11 +71,13 @@ def main():
             #Se verifica si hay jaque mate en el tablero del jugador humano
             if juego == 0:
                 print ('Jaque mate, gana learningbot')
-                turno.grafo[tabs[m.strTab]].puntaje = turno.grafo[tabs[m.strTab]].puntaje + 20
+                turno.grafo[tabs[m.strTab]].puntaje = \
+                turno.grafo[tabs[m.strTab]].puntaje + 20
                 break
             elif juego == 1:
                 print ('Tablas, Rey blanco ahogado')
-                turno.grafo[tabs[m.strTab]].puntaje = turno.grafo[tabs[m.strTab]].puntaje + 5
+                turno.grafo[tabs[m.strTab]].puntaje = \
+                turno.grafo[tabs[m.strTab]].puntaje + 5
                 break
             #Juega la computadora, creando los posibles movimientos
             #Se elige el mejor en base de un puntaje

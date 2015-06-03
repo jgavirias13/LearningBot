@@ -44,7 +44,8 @@ class Tablero():
             turno = 0
         def juegaNegro():
             turno = 1
-        #"Switch case" para los caracteres de cada ficha con su respectivo codigo ASCII
+        #"Switch case" para los caracteres de cada ficha con su respectivo
+        #codigo ASCII
         options = {98: casillaBlanca,   #b
                     66: casillaNegra,   #B
                     112: peonBlanco,    #p
