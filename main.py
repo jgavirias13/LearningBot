@@ -1,6 +1,6 @@
 #Archivo de inicializacion del programa
 #Desde aqui se carga la memoria guardada anterior
-#Y se crea la memoria al final de la ejecución
+#Y se crea la memoria al final de la ejecucion
 import chess
 import fichas
 import random
