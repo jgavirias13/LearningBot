@@ -79,7 +79,7 @@ def main():
                 break
             #Juega la computadora, creando los posibles movimientos
             #Se elige el mejor en base de un puntaje
-            posib(juego)
+            turno.posib(juego)
             pos = turno.tabs[juego.strTab]
             actual.append(pos)
             posibles = []
