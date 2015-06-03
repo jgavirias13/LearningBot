@@ -37,13 +37,16 @@ def jaque(tab):
     while seg:
         aux = a + 8*mov
         if (aux < 64):
-            if (tab.tablero[aux].jugador == "n"): #Verifica si esta vacia la casilla
+            if (tab.tablero[aux].jugador == "n"): 
+            #Verifica si esta vacia la casilla
                 mov = mov + 1
-            elif (tab.tablero[aux].jugador == jug): #Verifica si en la casilla hay una pieza propia
+            elif (tab.tablero[aux].jugador == jug): 
+            #Verifica si en la casilla hay una pieza propia
                 seg = 0
             else:
-                if (-8) in tab.tablero[aux].come and mov in tab.tablero[aux].movimientos: #Verifica si la casilla que hace el jaque si puede
-                                                                                         #hacer el movimiento para comer
+                if (-8) in tab.tablero[aux].come and mov in tab.tablero[aux].movimientos: 
+                #Verifica si la casilla que hace el jaque si puede
+                #hacer el movimiento para comer
                     return 1
                 else:
                     seg = 0
@@ -172,29 +175,37 @@ def jaque(tab):
 
     #Verifica los jaques para el caballo
     aux = a - 17
-    if (aux >= 0 and a/8 == aux/8 + 2 and tab.tablero[aux].jugador != jug and tab.tablero[aux].type().lower() == 'c'):
-        return 1
+    if (aux >= 0 and a/8 == aux/8 + 2 and tab.tablero[aux].jugador != jug):
+        if (tab.tablero[aux].type().lower() == 'c'):
+            return 1
     aux = a - 15
-    if (aux >= 0 and a/8 == aux/8 + 2 and tab.tablero[aux].jugador != jug and tab.tablero[aux].type().lower() == 'c'):
-        return 1
+    if (aux >= 0 and a/8 == aux/8 + 2 and tab.tablero[aux].jugador != jug):
+        if (tab.tablero[aux].type().lower() == 'c'):
+            return 1
     aux = a - 10
-    if (aux >= 0 and a/8 == aux/8 + 1 and tab.tablero[aux].jugador != jug and tab.tablero[aux].type().lower() == 'c'):
-        return 1
+    if (aux >= 0 and a/8 == aux/8 + 1 and tab.tablero[aux].jugador != jug):
+        if (tab.tablero[aux].type().lower() == 'c'):
+            return 1
     aux = a - 6
-    if (aux >= 0 and a/8 == aux/8 + 1 and tab.tablero[aux].jugador != jug and tab.tablero[aux].type().lower() == 'c'):
-        return 1
+    if (aux >= 0 and a/8 == aux/8 + 1 and tab.tablero[aux].jugador != jug):
+        if (tab.tablero[aux].type().lower() == 'c'):
+            return 1
     aux = a + 6
-    if (aux < 64 and a/8 == aux/8 - 1 and tab.tablero[aux].jugador != jug and tab.tablero[aux].type().lower() == 'c'):
-        return 1
+    if (aux < 64 and a/8 == aux/8 - 1 and tab.tablero[aux].jugador != jug):
+        if (tab.tablero[aux].type().lower() == 'c'):
+            return 1
     aux = a + 10
-    if (aux < 64 and a/8 == aux/8 - 1 and tab.tablero[aux].jugador != jug and tab.tablero[aux].type().lower() == 'c'):
-        return 1
+    if (aux < 64 and a/8 == aux/8 - 1 and tab.tablero[aux].jugador != jug):
+        if (tab.tablero[aux].type().lower() == 'c'):
+            return 1
     aux = a + 17
-    if (aux < 64 and a/8 == aux/8 - 2 and tab.tablero[aux].jugador != jug and tab.tablero[aux].type().lower() == 'c'):
-        return 1
+    if (aux < 64 and a/8 == aux/8 - 2 and tab.tablero[aux].jugador != jug):
+        if (tab.tablero[aux].type().lower() == 'c'):
+            return 1
     aux = a + 15
-    if (aux < 64 and a/8 == aux/8 - 2 and tab.tablero[aux].jugador != jug and tab.tablero[aux].type().lower() == 'c'):
-        return 1
+    if (aux < 64 and a/8 == aux/8 - 2 and tab.tablero[aux].jugador != jug):
+        if (tab.tablero[aux].type().lower() == 'c'):
+            return 1
     return 0
 
 
@@ -211,7 +222,8 @@ def imprimirTablero(tab):
     print ("-----------------")
     print ("-----------------")
 
-#Agrega un tablero al grafo, una lista a sus aristas y lo agrega al diccionaro con su string del tablero y la posicion del grafo
+#Agrega un tablero al grafo, una lista a sus aristas 
+#y lo agrega al diccionaro con su string del tablero y la posicion del grafo
 def agregarGrafo(origen, destino, puntaje):
     #Se verifica si el tablero esta en ya en el grafo o no
     if (destino.strTab in tabs):
@@ -239,7 +251,8 @@ def juegaHM(origen):
         jaq = 1
         print ("Usted esta en jaque")
     posib(origen)
-    #Llama a la funcion posib para sacar todas las posibles jugadas que puede hacer el humano, para determinar si esta en jaque
+    #Llama a la funcion posib para sacar todas las posibles 
+    #jugadas que puede hacer el humano para determinar si esta en jaque
     if (len(blancas) == 0):
         if jaq:
             return 0
@@ -265,14 +278,16 @@ def juegaHM(origen):
                 #Ver si el humano va a coronar
                 if (ficha.type() == 'p' and ops < 8):
                     f = raw_input('Que ficha desea coronar (c/a/t/r): ')
-                    jugada = origen.strTab[:inp] + colorCasilla(inp) + origen.strTab[inp+1:ops] + f + origen.strTab[ops+1:64] + '1'
+                    jugada = origen.strTab[:inp] + colorCasilla(inp) + origen.strTab[inp+1:ops]
+                    jugada = jugada + f + origen.strTab[ops+1:64] + '1'
                     if (not jugada in blancas):
                         print ("No es posible su jugada")
                         continue
                 else:
                     #Se crea el tablero con la jugada propuesta por el humano
                     if (inp < ops):
-                        jugada = origen.strTab[:inp] + colorCasilla(inp) + origen.strTab[inp+1:ops] + origen.tablero[inp].type() + origen.strTab[ops+1:64] + '1'
+                        jugada = origen.strTab[:inp] + colorCasilla(inp) + origen.strTab[inp+1:ops]
+                        jugada = jugada + origen.tablero[inp].type() + origen.strTab[ops+1:64] + '1'
                         taux = chess.Tablero(jugada)
                         score = 0
                         if (origen.tablero[ops].jugador == 1):
@@ -283,7 +298,8 @@ def juegaHM(origen):
                             print ("No es posible su jugada")
                             continue
                     else:
-                        jugada = origen.strTab[:ops] + origen.tablero[inp].type() + origen.strTab[ops+1:inp] + colorCasilla(inp) + origen.strTab[inp+1:64] + '1'
+                        jugada = origen.strTab[:ops] + origen.tablero[inp].type() + origen.strTab[ops+1:inp]
+                        jugada = jugada + colorCasilla(inp) + origen.strTab[inp+1:64] + '1'
                         taux = chess.Tablero(jugada)
                         taux = chess.Tablero(jugada)
                         score = 0
@@ -310,12 +326,15 @@ def posib(origen):
         op = 0
     for i in range (len(cad)-1):
         ficha = origen.tablero[i]
-        #Se recorre todas las casillas del tablero y se verifica que esta pertenezca al jugador, para luego crear todos los tableros con los movimientos de esta ficha
+        #Se recorre todas las casillas del tablero y 
+        #se verifica que esta pertenezca al jugador
+        #para luego crear todos los tableros con los movimientos de esta ficha
         if (cad[i] != 'b' and cad[i] != 'B' and ficha.jugador == jug):
             if (ficha.type() != 'C' and ficha.type() != 'P' and ficha.type() != 'c' and ficha.type() != 'p'):
                 for j in range (len(ficha.direccion)):
                     for k in range (len(ficha.movimientos)):
-                        #Se recorre la cantidad de movimientos y la direccion que pueden tomar estos, verifica cual de estas es y crea el tablero
+                        #Se recorre la cantidad de movimientos y la direccion que pueden tomar estos
+                        #verifica cual de estas es y crea el tablero
                         direc = ficha.direccion[j]
                         movi = ficha.movimientos[k]
                         aux = i+(direc*movi)
