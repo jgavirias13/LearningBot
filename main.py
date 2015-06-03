@@ -22,6 +22,7 @@ def colorCasilla(pos):
         return "B"
     return "b"
 
+#Funcion que verifica si en un tablero existe el jaque
 def jaque(tab):
     a = 0
     jug = 0
@@ -212,6 +213,7 @@ def imprimirTablero(tab):
 
 #Agrega un tablero al grafo, una lista a sus aristas y lo agrega al diccionaro con su string del tablero y la posicion del grafo
 def agregarGrafo(origen, destino, puntaje):
+    #Se verifica si el tablero esta en ya en el grafo o no
     if (destino.strTab in tabs):
         ax = tabs[destino.strTab]
         out = grafo[ax]
