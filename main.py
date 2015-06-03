@@ -85,7 +85,7 @@ def main():
             posibles = []
             maximo = 0
             for i in range(len(turno.aristas[pos])):
-                tabAux = turno.grafo[aristas[pos][i]]
+                tabAux = turno.grafo[turno.aristas[pos][i]]
                 if (tabAux.puntaje == maximo):
                     posibles.append(tabAux)
                 elif (tabAux.puntaje > maximo):
