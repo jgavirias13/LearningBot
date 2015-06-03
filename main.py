@@ -116,7 +116,6 @@ def main():
             jugar = 0
     #Se crea una memoria como archivo de texto con la informacion del grafo
     for i in range(len(turno.grafo)):
-        print turno.grafo[i].puntaje
         cadenaux = turno.grafo[i].strTab + str(turno.grafo[i].puntaje)
         archivo.write(cadenaux)
         archivo.write('\n')
